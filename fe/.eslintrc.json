@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "plugin:vue/essential",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "vue/html-indent": ["error", 2],
+    "vue/require-default-prop": "off",
+    "vue/require-prop-types": "off",
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/max-attributes-per-line": "off",
+    "vue/html-closing-bracket-spacing": "off",
+    "vue/no-unused-components": "off",
+    "vue/no-unused-vars": "off",
+    "vue/no-v-html": "off",
+    "vue/attribute-hyphenation": "off",
+    "no-console": "off",
+    "no-debugger": "off"
+  }
+}

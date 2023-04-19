@@ -1,2 +1,5 @@
 /fe/vendor
 /be/node_modules
+/data
+/php.ini
+/initdb
