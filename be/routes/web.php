@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('/profile', 'ProfileController@index');
+    Route::get('/ahoj', function() {
+        $ahoj = [
+            'meno' => "kokot",
+            "priezvisko" => "aosdjaos"
+        ];
+        return response()->json($ahoj);
+    });
+});
+
+
