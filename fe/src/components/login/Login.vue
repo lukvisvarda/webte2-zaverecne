@@ -21,10 +21,27 @@
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css';
+import { useStore } from 'vuex';
 // import api from "../../utils/api" TODO: UNCOMMENT
 
 export default{
+
   name: 'LoginForm',
+  computed:{
+    formInvalid() {
+      return this.nameError || this.emailError || !this.name || !this.email
+    },
+  },
+
+  setup(){
+    const store = useStore();
+
+    return {
+      isLoggedIn: store.getters.isLoggedIn,
+      login: (user) => store.dispatch('login', user),
+    }
+  },
+
   data() {
     return{
       email: "",
@@ -34,10 +51,14 @@ export default{
     }
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      console.log("Submiting");
-      //TODO: BACKEND API CALL to get the jwt TOKEN
+    onSubmit() {
+      const loginDto = {
+        email: this.email,
+        password: this.password,
+      }
+      console.log(loginDto);
+      console.log(this.getIsLoggedIn);
+      this.login(loginDto);
     },
     validatePassword() {
       if (!this.password) {
@@ -56,11 +77,7 @@ export default{
       }
     }
   },
-  computed:{
-    formInvalid() {
-      return this.nameError || this.emailError || !this.name || !this.email
-    }
-  },
+ 
   watch: {
     email: 'validateEmail',
     password: 'validatePassword'
