@@ -3,10 +3,10 @@ import AppService from "@/services/app.service";
 
 
 // eslint-disable-next-line no-undef
-const axiosInstance = axios.create({baseURL: process.env.BACKEND_URL});
+const api = axios.create({baseURL: process.env.BACKEND_URL});
 
 
-axiosInstance.interceptors.request.use(async (req) => {
+api.interceptors.request.use(async (req) => {
   const accessToken = AppService.getToken();
   if (accessToken) {
     req.headers.Authorization = `Bearer ${accessToken}`;
@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(async (req) => {
   return req;
 });
 
-axiosInstance.interceptors.response.use(
+api.interceptors.response.use(
   async (res) => res.data,
   (err) => {
     if (err.response.status === 401) {
@@ -24,4 +24,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export default api;

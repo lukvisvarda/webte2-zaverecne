@@ -7,9 +7,13 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/login/Login.vue';
+import Auth from './context/auth';
 
 export default {
   name: 'App',
+  provide: {
+    Auth
+  },
   components: {
     HelloWorld,
     Login

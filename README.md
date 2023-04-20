@@ -24,6 +24,8 @@ Vsetky nasledovne priazy spustat v podpriecinku be.
 $ php artisan migrate
 ```
 ### Seedovanie databazy
+Vytvori studentske a ucielske konto `teacher@example.com` a `student@example.com` s heslom `pass123`
+
 ```bash
 $ php artisan db:seed
 ```
@@ -40,6 +42,8 @@ $ cd be
 $ composer install 
 $ php artisan migrate
 $ php artisan db:seed
+```
+```bash
 $ php artisan serve
 ```
 Api bezi na: _[http://localhost:8000](http://localhost:8000)_

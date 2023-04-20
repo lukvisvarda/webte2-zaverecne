@@ -28,4 +28,9 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     });
 });
 
+Route::post('/auth/login', 'AuthController@login');
+Route::get('auth/login', function(){
+    return json_encode(['value' => 'login']);
+});
+
 
