@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -22,6 +24,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'aisId',
+        'role',
     ];
 
     /**
@@ -51,5 +55,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public static function create($data)
+    {
+//        $data['password'] = Hash::make($data['password']);
+//        DB::table('users')->insert($data);
+        $user = new User;
+        $user['name'] = $data['name'];
+        $user['surname'] = $data['surname'];
+        $user['email'] = $data['email'];
+        $user['password'] = Hash::make($data['password']);
+        $user['aisId'] = $data['aisId'];
+        $user['role'] = $data['role'] ?? 'student';
+
+        $user->save();
+
+        return $user;
     }
 }

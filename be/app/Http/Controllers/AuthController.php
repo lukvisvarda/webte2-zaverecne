@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
@@ -20,5 +21,11 @@ class AuthController
         }
 
         return response()->json(compact('token'));
+    }
+
+    public function me()
+    {
+        $user = Auth::user();
+        return response()->json($user);
     }
 }
