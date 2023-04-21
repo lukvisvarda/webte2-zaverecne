@@ -2,6 +2,10 @@
 
 Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 
+## TODOS:
+- spravit sk*rvene corsy na backende, aby sa islo z fe nan pripojit
+- parser na latex subory s prikladmi
+
 ## Docker run
 docker compose up -d
 
