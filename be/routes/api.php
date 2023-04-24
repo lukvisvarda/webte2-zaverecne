@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use \App\Http\Controllers\ParserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('cors');
 
 Route::middleware('jwt.auth')->get('auth/me', [AuthController::class, 'me']);
+
+Route::post('/latex', [ParserController::class, 'store']);
+
