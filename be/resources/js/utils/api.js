@@ -4,7 +4,7 @@ import AppService from "@/services/app.service";
 
 // eslint-disable-next-line no-undef
 const api = axios.create({
-    baseURL: 'http://localhost:8000/',
+    baseURL: '/',
     withCredentials: true,
 });
 
@@ -13,6 +13,7 @@ api.interceptors.request.use(async (req) => {
   const accessToken = AppService.getToken();
   if (accessToken) {
     req.headers.Authorization = `Bearer ${accessToken}`;
+      console.log(req.headers.Authorization)
   }
   return req;
 });

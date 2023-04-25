@@ -1,5 +1,5 @@
-import './bootstrap';
 /* eslint-disable no-unused-vars */
+require('./bootstrap');
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

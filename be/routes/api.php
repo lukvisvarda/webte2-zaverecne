@@ -19,7 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
-Route::post('/auth/login', [AuthController::class, 'login'])->middleware('cors');
+
+Route::post('auth/login', [AuthController::class, 'login']);
+
+
+
+//    Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware('jwt.auth')->get('auth/me', [AuthController::class, 'me']);
+
+//Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
+

@@ -20,7 +20,7 @@ class AuthController
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(compact('token'), headers:['Access-Control-Allow-Origin'=> '*']);
     }
 
     public function me()

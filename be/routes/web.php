@@ -13,24 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/", function() {
+    return view('vue');
 });
 
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('/profile', 'ProfileController@index');
-    Route::get('/ahoj', function() {
-        $ahoj = [
-            'meno' => "kokot",
-            "priezvisko" => "aosdjaos"
-        ];
-        return response()->json($ahoj);
-    });
-});
-
-Route::post('/auth/login', 'AuthController@login');
-Route::get('auth/login', function(){
-    return json_encode(['value' => 'login']);
-});
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//
+//Route::group(['middleware' => 'jwt.auth'], function () {
+//    Route::get('/profile', 'ProfileController@index');
+//    Route::get('/ahoj', function() {
+//        $ahoj = [
+//            'meno' => "kokot",
+//            "priezvisko" => "aosdjaos"
+//        ];
+//        return response()->json($ahoj);
+//    });
+//});
+//
+//Route::post('/auth/login', 'AuthController@login');
+//Route::get('auth/login', function(){
+//    return json_encode(['value' => 'login']);
+//});
 
 

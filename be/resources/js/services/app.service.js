@@ -1,6 +1,5 @@
 const AppService = {
   getToken(){
-    console.log(window.localStorage.getItem("accessToken"));
     return window.localStorage.getItem("accessToken");
   },
   setToken(token){
