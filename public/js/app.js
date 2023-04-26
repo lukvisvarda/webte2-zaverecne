@@ -18168,7 +18168,15 @@ __webpack_require__.r(__webpack_exports__);
       return str.substring(start, end + 1).trim();
     },
     endString: function endString() {
-      return this.zadanie.substring(this.zadanie.lastIndexOf('$'));
+      var substring = this.zadanie.substring(this.zadanie.lastIndexOf('$'));
+      if (substring.length > 1) {
+        while (substring.charAt(0) === '$') {
+          substring = substring.substring(1);
+        }
+        return substring;
+      } else {
+        return "";
+      }
     }
   }
 });
@@ -18347,6 +18355,8 @@ __webpack_require__.r(__webpack_exports__);
         // Handle error
         console.error('Error:', error);
       });
+      //reload page
+      location.reload();
     }
   }
 });
@@ -18364,10 +18374,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_good_table_next__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-good-table-next */ "./node_modules/vue-good-table-next/dist/vue-good-table.esm.js");
+/* harmony import */ var vue_good_table_next__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-good-table-next */ "./node_modules/vue-good-table-next/dist/vue-good-table.esm.js");
 /* harmony import */ var vue_good_table_next_dist_vue_good_table_next_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-good-table-next/dist/vue-good-table-next.css */ "./node_modules/vue-good-table-next/dist/vue-good-table-next.css");
 /* harmony import */ var _utils_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/api */ "./frontend/utils/api.js");
 /* harmony import */ var _constants_edpoints__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../constants/edpoints */ "./frontend/constants/edpoints.js");
+/* harmony import */ var _latex_Task_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../latex/Task.vue */ "./frontend/components/latex/Task.vue");
+
 
 
 
@@ -18375,11 +18387,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TeacherTable',
   components: {
-    VueGoodTable: vue_good_table_next__WEBPACK_IMPORTED_MODULE_3__.VueGoodTable
+    VueGoodTable: vue_good_table_next__WEBPACK_IMPORTED_MODULE_4__.VueGoodTable,
+    Task: _latex_Task_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
       columns: [{
+        label: 'File name',
+        field: 'file_name'
+      }, {
         label: 'Name',
         field: 'name'
       }, {
@@ -18406,7 +18422,9 @@ __webpack_require__.r(__webpack_exports__);
             _this.rows.push({
               name: response[i].parsed[j].name,
               task: response[i].parsed[j].task,
-              solution: response[i].parsed[j].solution
+              // solution: response[i].parsed[j].solution,
+              solution: response[i].parsed[j].solution,
+              file_name: response[i].name
             });
           }
         }
@@ -18650,12 +18668,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  key: 0
+};
+var _hoisted_2 = {
+  key: 1
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Task = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Task");
   var _component_vue_good_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-good-table");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_good_table, {
     columns: $data.columns,
-    rows: $data.rows
-  }, null, 8 /* PROPS */, ["columns", "rows"])]);
+    rows: $data.rows,
+    style: {
+      "margin-left": "50px",
+      "margin-right": "50px",
+      "margin-bottom": "50px"
+    }
+  }, {
+    "table-row": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (props) {
+      return [props.column.field === 'name' || props.column.field === 'file_name' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(props.formattedRow[props.column.field]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), props.column.field === 'task' || props.column.field === 'solution' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Task, {
+        zadanie: props.formattedRow[props.column.field]
+      }, null, 8 /* PROPS */, ["zadanie"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["columns", "rows"])]);
 }
 
 /***/ }),

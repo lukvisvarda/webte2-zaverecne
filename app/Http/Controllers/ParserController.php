@@ -18,7 +18,7 @@ class ParserController extends Controller
         $parsedData = $parser->parse(Storage::get($path));
 
         $latex = new LatexFile;
-        $latex->name = $name;
+        $latex->name = $file->getClientOriginalName();
         $latex->file = Storage::get($path);
         $latex->parsed = $parsedData;
         $latex->save();

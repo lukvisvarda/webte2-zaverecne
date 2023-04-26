@@ -39,6 +39,8 @@ export default {
           // Handle error
           console.error('Error:', error);
         });
+      //reload page
+      location.reload();
     }
   }
 }

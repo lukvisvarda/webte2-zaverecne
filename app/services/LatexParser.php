@@ -11,7 +11,10 @@ class LatexParser
             $task = preg_replace('/\\\\begin{equation\*}|\\\\end{equation\*}/', '$', $match['task']); // Nahradenie \begin a \end equation za $
             $task = preg_replace('/\\\\begin{.*?}|\\\\end{.*?}/', '', $task); // Odstrániť \begin a \end z tasku
             $task = preg_replace('/\\\\includegraphics{[^{}]+}/', '', $task); // Vymazať príkaz \includegraphics z tasku
-            $solution = preg_replace('/\\\\begin{.*?}|\\\\end{.*?}/', '', $match['solution']); // Odstrániť \begin a \end z riešenia
+          $solution = preg_replace('/\\\\begin{equation\*}|\\\\end{equation\*}/', '$', $match['solution']); // Nahradenie \begin a \end equation za $
+          $solution = preg_replace('/\\\\begin{.*?}|\\\\end{.*?}/', '', $solution); // Odstrániť \begin a \end z tasku
+          $solution = preg_replace('/\\\\includegraphics{[^{}]+}/', '', $solution); // Vymazať príkaz \includegraphics z tasku
+//            $solution = preg_replace('/\\\\begin{.*?}|\\\\end{.*?}/', '', $match['solution']); // Odstrániť \begin a \end z riešenia
             $result[] = [
                 'name' => $match['name'],
                 'task' => str_replace(['\\\\', '\\n'], ['', ''], $task),
