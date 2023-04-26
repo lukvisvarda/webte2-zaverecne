@@ -4,6 +4,8 @@
 
 
 Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
+## Frontend
+Vue sa nachadza v priečinku `frontend`.
 
 ## TODOS:
 - investigate: ako dostat tuto haluz na server
