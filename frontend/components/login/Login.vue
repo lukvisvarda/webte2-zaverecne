@@ -17,7 +17,7 @@
     </div>
 
     <latex :str="this.latexKokotina"></latex>
-    <task></task>
+    <task zadanie=""></task>
   </form>
 </template>
 
@@ -27,6 +27,7 @@ import { useStore } from 'vuex';
 import Latex from '../latex/Latex.vue';
 import Task from "../latex/Task.vue";
 import { useToast } from "vue-toastification";
+import {useRouter} from "vue-router";
 
 export default{
 

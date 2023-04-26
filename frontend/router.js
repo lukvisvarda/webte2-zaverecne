@@ -4,6 +4,8 @@ import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/login/Login.vue'
 import Latex from "./components/latex/Latex.vue"
 import Task from "./components/latex/Task.vue";
+import Insert from "./components/teacher/InsertLatex.vue";
+import store from './store/store';
 
 // Vue.use(VueRouter);
 
@@ -12,7 +14,7 @@ const routes = [
   { path: '/login', component: Login},
   {
       path: '/latex',
-      component: Task,
+      // component: Task,
       meta:{
           requiresAuth: true
       }
