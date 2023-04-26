@@ -7,8 +7,6 @@ import store from './store/store';
 import Latex from "./components/latex/Latex.vue"
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'

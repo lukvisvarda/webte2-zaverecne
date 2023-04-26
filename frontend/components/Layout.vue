@@ -1,25 +1,4 @@
 <template>
-<!--  <ul>-->
-<!--    <li>-->
-<!--      <router-link to="/login">-->
-<!--        <button>login</button>-->
-<!--      </router-link>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <router-link to="/latex">-->
-<!--        <button>latex</button>-->
-<!--      </router-link>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <router-link to="/insert">-->
-<!--        <button>insert</button>-->
-<!--      </router-link>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <button @click="logout">logout</button>-->
-<!--    </li>-->
-<!--  </ul>-->
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
