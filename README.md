@@ -1,4 +1,7 @@
 # Webte zaverecne zadanie
+![Vue3](https://img.shields.io/badge/Vue-3-green)
+![Laravel10.8](https://img.shields.io/badge/Laravel-10.8-red)
+
 
 Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 
