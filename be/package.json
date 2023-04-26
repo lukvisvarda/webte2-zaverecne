@@ -5,8 +5,9 @@
         "build": "vite build",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js --watch",
         "server:dev": "php artisan serve",
-        "watch": "npm run development -- --watch",
-        "dev": "concurrently \"npm run development\" \"npm run server:dev\""
+        "dev": "concurrently \"npm run development\" \"npm run server:dev\" \"npm run browser-sync\"",
+        "browser-sync": "browser-sync start --proxy http://127.0.0.1:8000 --files 'resources/**/*,public/**/*'",
+        "watch": "npm run development -- --watch"
     },
     "devDependencies": {
         "axios": "^1.1.2",
@@ -22,6 +23,7 @@
     "dependencies": {
         "bootstrap": "^5.2.3",
         "concurrently": "^8.0.1",
+        "katex": "^0.16.6",
         "laravel-mix": "^6.0.49",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1"

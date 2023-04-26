@@ -7,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>kokotina skurvena</h1>
     <div id="app">
 
     </div>

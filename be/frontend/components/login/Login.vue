@@ -16,19 +16,24 @@
       </div>
     </div>
 
+    <latex :str="this.latexKokotina"></latex>
+    <task></task>
   </form>
 </template>
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css';
 import { useStore } from 'vuex';
-import api from "../../utils/api";
-import {AUTH_LOGIN, AUTH_ME} from "../../constants/edpoints";
-// import api from "../../utils/api" TODO: UNCOMMENT
+import Latex from '../latex/Latex.vue';
+import Task from "../latex/Task.vue";
 
 export default{
 
   name: 'LoginForm',
+  components:{
+    Latex,
+    Task
+  },
   computed:{
     formInvalid() {
       return this.nameError || this.emailError || !this.name || !this.email
@@ -50,6 +55,7 @@ export default{
       password: '',
       emailError: '',
       passwordError: '',
+      latexKokotina: "\\dfrac{10}{20}"
     }
   },
   methods: {
@@ -58,15 +64,16 @@ export default{
         email: this.email,
         password: this.password,
       }
-      console.log(loginDto);
+      // console.log(loginDto);
 
-      const response = await api.post(AUTH_LOGIN, loginDto);
-        console.log(response)
+      // const response = await api.post(AUTH_LOGIN, loginDto);
+      // console.log(response)
       // console.log(this.getIsLoggedIn);
       // const response = await this.login(loginDto);
       //   console.log(response);
       //   const a = await api.get(AUTH_ME);
       //   console.log(a);
+      await this.login(loginDto);
     },
     validatePassword() {
       if (!this.password) {

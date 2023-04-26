@@ -11,7 +11,6 @@ class AuthController
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
@@ -20,7 +19,7 @@ class AuthController
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json(compact('token'), headers:['Access-Control-Allow-Origin'=> '*']);
+        return response()->json(compact('token'));
     }
 
     public function me()
