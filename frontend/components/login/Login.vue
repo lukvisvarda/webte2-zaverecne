@@ -13,6 +13,7 @@
         <div v-if="passwordError" class="text-danger">{{ passwordError }}</div>
 
         <input type="submit" class="btn btn-primary"/>
+
       </div>
     </div>
 
@@ -27,6 +28,8 @@ import { useStore } from 'vuex';
 import Latex from '../latex/Latex.vue';
 import Task from "../latex/Task.vue";
 import { useToast } from "vue-toastification";
+// import router from "../../router";
+import {useRouter} from "vue-router";
 
 export default{
 
@@ -43,10 +46,14 @@ export default{
 
   setup(){
     const store = useStore();
+    const router = useRouter();
+    const toast = useToast();
 
     return {
       isLoggedIn: store.getters.isLoggedIn,
       login: (user) => store.dispatch('login', user),
+      redirect: (to) => router.push(to),
+      toast: function(msg) { toast.error(msg) },
     }
   },
 
@@ -62,26 +69,18 @@ export default{
   },
   methods: {
     async onSubmit() {
-      const toast = useToast();
+      // const toast = useToast();
       const loginDto = {
         email: this.email,
         password: this.password,
       }
-      // console.log(loginDto);
 
-      // const response = await api.post(AUTH_LOGIN, loginDto);
-      // console.log(response)
-      // console.log(this.getIsLoggedIn);
-      // const response = await this.login(loginDto);
-      //   console.log(response);
-      //   const a = await api.get(AUTH_ME);
-      //   console.log(a);
       this.loginSuccess = await this.login(loginDto);
       if(this.loginSuccess){
-        //TODO:
+        await this.redirect('/');
       } else {
         console.log("Wrong credentials")
-        toast.error("Wrong credentials")
+        this.toast("Wrong credentials");
       }
 
     },

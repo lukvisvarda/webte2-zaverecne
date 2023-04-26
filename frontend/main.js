@@ -8,16 +8,20 @@ import Latex from "./components/latex/Latex.vue"
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
-
+import routerAuth from './router-auth';
 
 
 const app = createApp(App);
 app.use(store);
-app.use(Latex);
-app.use(router);
 app.use(Toast, {
     transition: "Vue-Toastification__bounce",
     maxToasts: 20,
     newestOnTop: true,
 })
-app.mount('#app');
+routerAuth(router);
+app.use(router);
+store.dispatch('init').then(() => {
+  console.log("after init");
+    // app.mount('#app');
+});
+// app.mount('#app');

@@ -12,7 +12,6 @@ export default createStore({
     login(state, user){
       state.loggedIn = true;
       state.user = user;
-      AppService.setToken(token)
     },
     logout(state){
       state.loggedIn = false;
@@ -32,16 +31,21 @@ export default createStore({
         console.log("err");
         return false;
       }
-      // axios.post("http://127.0.0.1:8000/api/auth/login",{email: "teacher@example.com", password: "pass123"}).then(response =>{
-      //   response.data
-      //   console.log('wtf is this shote');
-      // });
     },
 
     logout({ commit }) {
-
       commit('logout');
     },
+
+    async init({ commit }){
+      const token = AppService.getToken();
+      console.log("tokeniiiiiik", token)
+      if(token){
+        const user = await AuthService.me();
+        if(user) commit('login', user);
+        else AppService.clearToken();
+      }
+    }
   },
   getters:{
     isLoggedIn: state => state.loggedIn,
