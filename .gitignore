@@ -20,4 +20,5 @@ yarn-error.log
 /data
 /php.ini
 /initdb
-/public/js
+/public/js/app.js
+/public/mix-manifest.json
