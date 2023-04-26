@@ -2,9 +2,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/login/Login.vue'
+import Latex from "./components/latex/Latex.vue"
 import Task from "./components/latex/Task.vue";
-import store from "./store/store";
 
+// Vue.use(VueRouter);
 
 const routes = [
   { path: '/', component: HelloWorld },
@@ -15,6 +16,9 @@ const routes = [
       meta:{
           requiresAuth: true
       }
+  },
+  {
+      path: '/insert', component: Insert,
   }
 ];
 
