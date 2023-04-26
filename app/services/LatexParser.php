@@ -19,7 +19,7 @@ class LatexParser
                 'image' => $this->extractImage($match['task']) ?? '',
             ];
         }
-        return json_encode($result);
+        return $result;
 
     }
 

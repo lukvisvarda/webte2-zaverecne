@@ -23,6 +23,12 @@ class ParserController extends Controller
         $latex->parsed = $parsedData;
         $latex->save();
 
-        return $latex->parsed;
+        return response()->json($latex->parsed);
+    }
+
+    // show all latex files in the database
+    public function index()
+    {
+        return LatexFile::all();
     }
 }

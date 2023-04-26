@@ -13,9 +13,10 @@ export default{
     Latex
   },
 
-  data(){
-    return{
-      zadanie: 'Vypočítajte prechodovú funkciu pre systém opísaný prenosovou funkciou\n    $\n        F(s)=\\dfrac{6}{(5s+2)^2}e^{-4s}\n    $'
+  props:{
+    zadanie:{
+      type: String,
+      required: true
     }
   },
 

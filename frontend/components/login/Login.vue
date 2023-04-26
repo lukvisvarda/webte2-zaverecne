@@ -43,10 +43,12 @@ export default{
 
   setup(){
     const store = useStore();
+    const toast = useToast();
 
     return {
       isLoggedIn: store.getters.isLoggedIn,
       login: (user) => store.dispatch('login', user),
+      toast: {toast}
     }
   },
 
@@ -62,7 +64,6 @@ export default{
   },
   methods: {
     async onSubmit() {
-      const toast = useToast();
       const loginDto = {
         email: this.email,
         password: this.password,
@@ -77,11 +78,13 @@ export default{
       //   const a = await api.get(AUTH_ME);
       //   console.log(a);
       this.loginSuccess = await this.login(loginDto);
-      if(this.loginSuccess){
+      if (this.loginSuccess) {
+
         //TODO:
       } else {
-        console.log("Wrong credentials")
-        toast.error("Wrong credentials")
+        console.log("Wrong credentials");
+        this.toast.toast.error("Wrong credentials");
+        // alert("Wrong credentials");
       }
 
     },
