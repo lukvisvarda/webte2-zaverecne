@@ -25,7 +25,7 @@ export default createStore({
         const response = await AuthService.login(user);
         console.log("ResponseToken", response.token)
         AppService.setToken(response.token);
-        commit('login', user);
+        commit('login', response.user);
         return true;
       }catch(err){
         console.log("err");
@@ -34,6 +34,8 @@ export default createStore({
     },
 
     logout({ commit }) {
+
+      AppService.clearToken();
       commit('logout');
     },
 

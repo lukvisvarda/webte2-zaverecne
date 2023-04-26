@@ -19,7 +19,8 @@ class AuthController
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json(compact('token'));
+        $user = Auth::user();
+        return response()->json(compact('token', 'user'));
     }
 
     public function me()

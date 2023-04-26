@@ -6,6 +6,9 @@
         <router-link to="/latex">
           <button>latex</button>
         </router-link>
+        <router-link to="/insert">
+          <button>insert</button>
+        </router-link>
     </div>
 </template>
 
