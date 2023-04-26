@@ -33,7 +33,15 @@ export default{
         return str.substring(start, end + 1).trim();
     },
       endString(){
-          return this.zadanie.substring(this.zadanie.lastIndexOf('$'));
+        let substring = this.zadanie.substring(this.zadanie.lastIndexOf('$'));
+        if(substring.length > 1){
+          while (substring.charAt(0) === '$'){
+            substring = substring.substring(1);
+          }
+          return substring;
+        }else{
+          return "";
+        }
       }
   }
 }
