@@ -30,9 +30,9 @@ Route::post('auth/login', [AuthController::class, 'login']);
 
 Route::middleware('jwt.auth')->get('auth/me', [AuthController::class, 'me']);
 
-Route::post('/latex',[ParserController::class, 'store']);
+Route::middleware('jwt.auth')->post('/latex',[ParserController::class, 'store']);
 
-Route::get('/latex',[ParserController::class, 'index']);
+Route::middleware('jwt.auth')->get('/latex',[ParserController::class, 'index']);
 
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
