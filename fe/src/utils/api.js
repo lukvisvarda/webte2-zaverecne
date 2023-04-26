@@ -3,7 +3,9 @@ import AppService from "@/services/app.service";
 
 
 // eslint-disable-next-line no-undef
-const api = axios.create({baseURL: 'http://localhost:8000/',
+const api = axios.create({
+    baseURL: 'http://localhost:8000/',
+    withCredentials: true,
 });
 
 
