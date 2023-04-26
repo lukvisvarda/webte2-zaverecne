@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -28,6 +29,8 @@ Route::post('auth/login', [AuthController::class, 'login']);
 //    Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware('jwt.auth')->get('auth/me', [AuthController::class, 'me']);
+
+Route::get('/latex',[ParserController::class, 'store']);
 
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
