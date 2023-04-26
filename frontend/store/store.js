@@ -27,9 +27,10 @@ export default createStore({
         console.log("ResponseToken", response.token)
         AppService.setToken(response.token);
         commit('login', user);
-
+        return true;
       }catch(err){
         console.log("err");
+        return false;
       }
       // axios.post("http://127.0.0.1:8000/api/auth/login",{email: "teacher@example.com", password: "pass123"}).then(response =>{
       //   response.data

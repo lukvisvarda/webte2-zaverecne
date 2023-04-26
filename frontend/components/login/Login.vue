@@ -26,6 +26,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useStore } from 'vuex';
 import Latex from '../latex/Latex.vue';
 import Task from "../latex/Task.vue";
+import { useToast } from "vue-toastification";
 
 export default{
 
@@ -55,11 +56,13 @@ export default{
       password: '',
       emailError: '',
       passwordError: '',
-      latexKokotina: "\\dfrac{10}{20}"
+      latexKokotina: "\\dfrac{10}{20}",
+      loginSuccess: false,
     }
   },
   methods: {
     async onSubmit() {
+      const toast = useToast();
       const loginDto = {
         email: this.email,
         password: this.password,
@@ -73,7 +76,14 @@ export default{
       //   console.log(response);
       //   const a = await api.get(AUTH_ME);
       //   console.log(a);
-      await this.login(loginDto);
+      this.loginSuccess = await this.login(loginDto);
+      if(this.loginSuccess){
+        //TODO:
+      } else {
+        console.log("Wrong credentials")
+        toast.error("Wrong credentials")
+      }
+
     },
     validatePassword() {
       if (!this.password) {
