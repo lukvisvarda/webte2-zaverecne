@@ -31,4 +31,11 @@ class ParserController extends Controller
     {
         return LatexFile::all();
     }
+
+    public function assign($id){
+        $latex = LatexFile::find($id);
+        $latex->assigned = true;
+        $latex->save();
+        return response()->json($latex);
+    }
 }

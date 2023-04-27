@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->binary('file');
             $table->json('parsed')->nullable();
+            $table->boolean('assigned')->default(false);
             $table->timestamps();
         });
     }

@@ -34,5 +34,7 @@ Route::middleware('jwt.auth')->post('/latex',[ParserController::class, 'store'])
 
 Route::middleware('jwt.auth')->get('/latex',[ParserController::class, 'index']);
 
+Route::middleware('jwt.auth')->put('/latex/assign/{id}',[ParserController::class, 'assign']);
+
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
