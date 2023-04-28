@@ -28,8 +28,6 @@ export default{
         let str = this.zadanie;
         let start = str.indexOf('$')+1;
         let end = str.indexOf('$', start + 1)-1;
-        let substring = str.substring(start, end + 1).trim();
-        console.log(substring)
         return str.substring(start, end + 1).trim();
     },
       endString(){

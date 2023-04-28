@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 require('./bootstrap');
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -25,7 +26,7 @@ app.use(Toast, {
   transition: "Vue-Toastification__bounce",
   maxToasts: 20,
   newestOnTop: true,
-})
+});
 app.use(router);
 store.dispatch('init').then(() => {
   console.log("after init");

@@ -1,11 +1,18 @@
 <template>
   <div>
-    <form @submit.prevent="submitForm">
-      <label for="latex-file">Select LaTeX file:</label>
-      <input type="file" id="latex-file" name="latex-file" accept=".tex, application/x-tex">
-      <button type="submit">Submit</button>
-    </form>
-    <TeacherTable/>
+
+      <AssignThesis/>
+      <div class="select">
+        <form @submit.prevent="submitForm">
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+
+      </div>
+      <TeacherTable/>
   </div>
 </template>
 
@@ -14,10 +21,12 @@
 import api from "../../utils/api";
 import {LATEX_POST} from "../../constants/edpoints";
 import TeacherTable from "./TeacherTable.vue";
+import AssignThesis from "./AssignThesis.vue";
 export default {
   name: 'InsertLatex',
   components: {
-    TeacherTable
+    TeacherTable,
+    AssignThesis
   },
   methods: {
     submitForm() {
