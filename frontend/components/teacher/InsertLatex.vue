@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm">
           <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <input class="form-control" type="file" id="latex-file" multiple>
           </div>
           <button type="submit">Submit</button>
         </form>

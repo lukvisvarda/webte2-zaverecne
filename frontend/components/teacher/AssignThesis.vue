@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <VueMultiselect
-      v-model="value"
+      v-model="selectedOptions"
       :options="options"
       :multiple="true"
       :taggable="true"
@@ -11,10 +11,9 @@
       label="name"
       track-by="code"
     />
-  <button class="btn btn-primary select-button">Potvrdiť</button>
+    <button class="btn btn-primary select-button" @click="submitSelection()">Potvrdiť</button>
   </div>
 </template>
-
 <script>
 import VueMultiselect from 'vue-multiselect'
 import api from "../../utils/api";
@@ -24,15 +23,9 @@ export default {
   name: "AssignThesis",
   components: {VueMultiselect},
 
-  // data () {
-  //   return {
-  //     value: [],
-  //     options: [{name: "Aasdfas", code:"asd"}]
-  //   }
-  // },
   setup() {
     const options = reactive([]);
-    const value = reactive([]);
+    const selectedOptions = reactive([]);
 
     api.get(LATEX_GET)
       .then(response => {
@@ -41,80 +34,35 @@ export default {
         //loop through the response and push the data to the options array
         for (let i = 0; i < response.length; i++) {
           // loop over parsed data and push to options array
-            options.push({
-              name: response[i].name,
-              code: response[i].name
-            });
-            value.push({
-              name: response[i].name,
-              code: response[i].name
-            });
+          options.push({
+            name: response[i].name,
+            code: response[i].name
+          });
         }
       });
 
-    console.log(options)
     const addTag = (newTag) => {
-      // api.get(LATEX_GET)
-      //   .then(response => {
-      //     // Clear options array before pushing new values
-      //     options.splice(0, options.length);
-      //     //loop through the response and push the data to the options array
-      //     for (let i = 0; i < response.length; i++) {
-      //       // loop over parsed data and push to options array
-      //       for(let j = 0; j < response[i].parsed.length; j++){
-      //         options.push({
-      //           name: response[i].parsed[j].name,
-      //           code: response[i].parsed[j].name
-      //         });
-      //       }
-      //     }
-      //   });
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      }
+      options.push(tag)
+      selectedOptions.push(tag)
+    };
 
-    //   const tag = {
-    //     name: newTag,
-    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-    //   }
-    //
-    //   options.push(tag);
-    //   value.push(tag);
-    }
+    const submitSelection = () => {
+      console.log("WATAFAAAK",selectedOptions);
+    };
 
     return {
       options,
-      value,
-      // addTag
+      selectedOptions,
+      addTag,
+      submitSelection,
     };
   },
-
-
-
-
-//   methods: {
-//     addTag (newTag) {
-//     console.log("SOM TUUUUUUUUUU")
-// //       api.get(LATEX_GET)
-// //         .then(response => {
-// // //loop through the response and push the data to the rows array
-// //           for (let i = 0; i < response.length; i++) {
-// //             // loop over parsed data and push to rows
-// //             for(let j = 0; j < response[i].parsed.length; j++){
-// //               this.options.push({
-// //                 name: response[i].parsed[j].name,
-// //                 code: response[i].parsed[j].name
-// //               });
-// //             }
-// //           }
-// //         })
-//
-//       const tag = {
-//         name: newTag,
-//         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-//       }
-//       this.options.push(tag)
-//       this.value.push(tag)
-//     }
-//   }
 }
+
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
