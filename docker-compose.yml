@@ -2,7 +2,6 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./be
       dockerfile: Dockerfile
     container_name: webte_backend
     restart: always
@@ -13,10 +12,6 @@ services:
       - "8000:80"
     depends_on:
       - db
-  frontend:
-    build: ./fe
-    ports:
-      - "8080:8080"
   db:
     image: mysql:latest
     restart: always
@@ -29,4 +24,4 @@ services:
       - ./data:/var/lib/mysql
       - ./initdb:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
