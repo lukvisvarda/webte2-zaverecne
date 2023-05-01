@@ -57,20 +57,20 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public static function create($data)
-    {
-//        $data['password'] = Hash::make($data['password']);
-//        DB::table('users')->insert($data);
-        $user = new User;
-        $user['name'] = $data['name'];
-        $user['surname'] = $data['surname'];
-        $user['email'] = $data['email'];
-        $user['password'] = Hash::make($data['password']);
-        $user['aisId'] = $data['aisId'];
-        $user['role'] = $data['role'] ?? 'student';
-
-        $user->save();
-
-        return $user;
-    }
+//    public static function create($data)
+//    {
+////        $data['password'] = Hash::make($data['password']);
+////        DB::table('users')->insert($data);
+//        $user = new User;
+//        $user['name'] = $data['name'];
+//        $user['surname'] = $data['surname'];
+//        $user['email'] = $data['email'];
+//        $user['password'] = Hash::make($data['password']);
+//        $user['aisId'] = $data['aisId'];
+//        $user['role'] = $data['role'] ?? 'student';
+//
+//        $user->save();
+//
+//        return $user;
+//    }
 }
