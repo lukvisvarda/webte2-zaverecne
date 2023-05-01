@@ -3,3 +3,7 @@ export const AUTH_LOGIN = 'api/auth/login';
 export const LATEX_POST = 'api/latex';
 
 export const LATEX_GET = 'api/latex';
+
+export const ASSIGN_POST = 'api/latex/assign';
+
+
