@@ -8,6 +8,7 @@ Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 Vue sa nachadza v priečinku `frontend`.
 
 ## TODOS:
+- investigate: tagy v komponente `AssignThesis` nefunguju vobec
 - investigate: ako dostat tuto haluz na server
 - docker composer nefunguje(to spravi IBAN)
 - investigate: po zmenseni okna sa do*ebe navbar, vyriesit
