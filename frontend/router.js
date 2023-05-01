@@ -6,6 +6,7 @@ import Latex from "./components/latex/Latex.vue"
 import Task from "./components/latex/Task.vue";
 import Insert from "./components/teacher/InsertLatex.vue";
 import store from './store/store';
+import StudentsPage from "./components/student/StudentsPage.vue";
 
 // Vue.use(VueRouter);
 
@@ -21,6 +22,9 @@ const routes = [
   },
   {
       path: '/insert', component: Insert, meta: { requiresAuth: true, requiresTeacher: true }
+  },
+  {
+    path: '/student', component: StudentsPage, meta: { requiresAuth: true, requiresTeacher: false }
   }
 ];
 

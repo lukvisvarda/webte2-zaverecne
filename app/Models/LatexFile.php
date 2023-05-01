@@ -15,5 +15,11 @@ class LatexFile extends Model
         'parsed' => 'array'
     ];
 
+    public function problems(){ // tu nebude fk
+      return $this->hasMany(Problem::class);
+    }
 
+    public static function findByName($name){
+      return static::where('name', $name)->first();
+    }
 }

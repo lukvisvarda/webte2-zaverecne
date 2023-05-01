@@ -8,7 +8,8 @@ Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 Vue sa nachadza v priečinku `frontend`.
 
 ## TODOS:
-- investigate: tagy v komponente `AssignThesis` nefunguju vobec
+- many to many relationship medzi user a problem treba prerobit na dalsiu entitu a pridat do nej aj stlpce `solved`, `pocet_bodov`, a `maximalny_pocet_bodov`, aby bolo mozne trackovat, ktory student ktore priklady vyriesil a kolko zane dostal bodov
+- v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
 - investigate: ako dostat tuto haluz na server
 - docker composer nefunguje(to spravi IBAN)
 - investigate: po zmenseni okna sa do*ebe navbar, vyriesit
@@ -16,6 +17,7 @@ Vue sa nachadza v priečinku `frontend`.
 - register (vytvorenie endpointu + frontend formular)
 - authguard na backende(aby non logged user nevedel robit requesty)
 - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)
+- [x] investigate: tagy v komponente `AssignThesis` nefunguju vobec
 - [x] spravit sk*rvene corsy na backende, aby sa islo z fe nan pripojit
 - [x] parser na latex subory s prikladmi
 - [x] login (frontend + backend)

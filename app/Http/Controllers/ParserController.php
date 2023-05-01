@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Problem;
 use Illuminate\Http\Request;
 use App\Models\LatexFile;
 use Illuminate\Support\Facades\Storage;
 use App\Services\LatexParser;
+use function GuzzleHttp\Promise\all;
 
 class  ParserController extends Controller
 {
@@ -22,8 +24,24 @@ class  ParserController extends Controller
         $latex->file = Storage::get($path);
         $latex->parsed = $parsedData;
         $latex->save();
+        foreach ($parsedData as $problem) {
+            var_dump($problem);
+            $problem2 = new Problem;
+            $problem2->name = $problem['name'];
+            $problem2->task = $problem['task'];
+            $problem2->image = $problem['image'];
+            $problem2->solution = $problem['solution'];
 
-        return response()->json($latex->parsed);
+//            $problem2->task = $problem->task;
+//            $problem2->image = $problem->image;
+//            $problem2->solution = $problem->solution;
+
+
+            $problem2->latex_file_id = $latex->id;
+            $problem2->save();
+        }
+
+//        return response()->json($latex->parsed);
     }
 
     // show all latex files in the database
