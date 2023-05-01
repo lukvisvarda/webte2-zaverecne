@@ -6,7 +6,7 @@ use App\Models\LatexFile;
 use Illuminate\Support\Facades\Storage;
 use App\Services\LatexParser;
 
-class ParserController extends Controller
+class  ParserController extends Controller
 {
     public function store(Request $request)
     {

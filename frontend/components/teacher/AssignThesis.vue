@@ -19,7 +19,7 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import api from "../../utils/api";
-import {LATEX_GET} from "../../constants/edpoints";
+import {ASSIGN_POST, LATEX_GET} from "../../constants/edpoints";
 import {reactive} from "vue";
 export default {
   name: "AssignThesis",
@@ -68,7 +68,14 @@ export default {
     }
 
     const submitSelection = () => {
-      console.log("WATAFAAAK",selectedOptions);
+      console.log(selectedOptions.map(option => option.name))
+      api.post(ASSIGN_POST, {
+        selectedOptions: selectedOptions.map(option => option.name)
+      }).then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      })
     };
 
     return {

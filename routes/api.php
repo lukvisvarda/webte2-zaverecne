@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignThesisController;
 use App\Http\Controllers\ParserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,8 @@ Route::middleware('jwt.auth')->post('/latex',[ParserController::class, 'store'])
 Route::middleware('jwt.auth')->get('/latex',[ParserController::class, 'index']);
 
 Route::middleware('jwt.auth')->put('/latex/assign/{id}',[ParserController::class, 'assign']);
+
+Route::middleware('jwt.auth')->post('/latex/assign',[AssignThesisController::class, 'store']);
 
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
