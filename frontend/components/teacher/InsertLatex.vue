@@ -21,11 +21,21 @@ import api from "../../utils/api";
 import {LATEX_GET, LATEX_POST} from "../../constants/edpoints";
 import TeacherTable from "./TeacherTable.vue";
 import AssignThesis from "./AssignThesis.vue";
+import { useToast } from "vue-toastification";
+import toast from "bootstrap/js/src/toast";
+
 export default {
   name: 'InsertLatex',
   components: {
     TeacherTable,
     AssignThesis
+  },
+
+  setup(){
+    const toast = useToast();
+    return {
+      toast: function(msg) { toast.error(msg) },
+    }
   },
 
   data(){
@@ -60,6 +70,11 @@ export default {
         });
     },
     submitForm() {
+      //if there are no files selected, return
+      if(document.querySelector('#latex-file').files.length === 0){
+        this.toast("Nebol vybraný žiaden súbor");
+      }
+
       const fileInput = document.querySelector('#latex-file');
       const file = fileInput.files[0];
       const formData = new FormData();

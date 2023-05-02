@@ -8,14 +8,29 @@
 <script>
 import api from "../../utils/api";
 import {GENERATE_POST} from "../../constants/edpoints";
+import {useToast} from "vue-toastification";
 
 export default {
   name: "StudentsPage",
 
+  setup() {
+    const toast = useToast();
+    return {
+      toast: function (msg) {
+        toast.error(msg)
+      },
+    }
+  },
+
   methods: {
     async generate() {
-
       const problem = await api.post(GENERATE_POST);
+      //if there are no tasks to generate, return
+      if(problem.length === 0){
+        this.toast("Nemáte žiadne úlohy na vygenerovanie");
+        return;
+      }
+
       console.log(problem);
     },
     seeTasks() {

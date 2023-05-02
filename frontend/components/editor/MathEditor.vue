@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { MathField, convertLatexToMarkup } from 'mathlive'
+import { MathfieldElement, convertLatexToMarkup } from 'mathlive'
 
 export default {
   components: {
-    MathField
+    MathfieldElement
   },
 
   props: {

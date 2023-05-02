@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class UserController{
   public function addRandomProblemFromSelectedLatexFiles(){
     $user =  Auth::user();
+
+    //ak nie su ziadne files na vyber tak vratim prazdny json
+    if(count(selectedFile::all()) == 0){
+      return response()->json();
+    }
     $selectedFiles = selectedFile::all()[0]['selectedFiles'];
 
     $arr = $selectedFiles ;
