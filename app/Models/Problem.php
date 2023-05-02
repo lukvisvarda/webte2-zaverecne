@@ -24,7 +24,8 @@ class Problem extends Model
 
   public function users()
   {
-    return $this->belongsToMany(User::class);
+    return $this->hasMany(UserProblem::class);
+//    return $this->belongsToMany(User::class);
   }
 
   public static function find(mixed $id)

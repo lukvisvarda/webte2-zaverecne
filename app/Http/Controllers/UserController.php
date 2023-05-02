@@ -5,6 +5,7 @@ use App\Models\LatexFile;
 use App\Models\Problem;
 use App\Models\selectedFile;
 use App\Models\User;
+use App\Models\UserProblem;
 use Illuminate\Support\Facades\Auth;
 
 class UserController{
@@ -28,11 +29,20 @@ class UserController{
     }
 
     $randomProblem = $allProblems[array_rand($allProblems)];
+    $randomProblemUserEntity = new UserProblem();
+//    $randomProblemUserEntity->user_id = $user['id'];
+//    $randomProblemUserEntity->problem_id = $randomProblem['id'];
+    $randomProblemUserEntity->solved = false;
+    $randomProblemUserEntity->max_points = $randomProblem['points'];
+    $randomProblemUserEntity->points = 0;
 
-    if($user instanceof User){
-      $user->assignedProblems()->attach($randomProblem['id']);
-    }
-    $user->save();
+    $randomProblemUserEntity->user()->associate($user);
+    $randomProblemUserEntity->problem()->associate($randomProblem);
+    $randomProblemUserEntity->save();
+//    if($user instanceof User){
+//      $user->assignedProblems()->attach($randomProblem['id']);
+//    }
+//    $user->save();
     return response()->json($randomProblem);
   }
 }

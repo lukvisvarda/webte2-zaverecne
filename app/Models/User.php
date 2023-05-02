@@ -30,8 +30,11 @@ class User extends Authenticatable implements JWTSubject
         'role',
     ];
 
+//    public function assignedProblems(){
+//      return $this->belongsToMany(Problem::class);
+//    }
     public function assignedProblems(){
-      return $this->belongsToMany(Problem::class);
+      return $this->hasMany(UserProblem::class);
     }
 
     /**
