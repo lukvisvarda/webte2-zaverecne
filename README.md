@@ -7,8 +7,13 @@ Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 ## Frontend
 Vue sa nachadza v priečinku `frontend`.
 
+# Davam do povedomia:
+- pri generovani prikladov na route `/student` je potrebne najprv cez ucitela pridat subor a nastavit ho pre generovanie, inak to nepojde
 ## TODOS:
-- many to many relationship medzi user a problem treba prerobit na dalsiu entitu a pridat do nej aj stlpce `solved`, `pocet_bodov`, a `maximalny_pocet_bodov`, aby bolo mozne trackovat, ktory student ktore priklady vyriesil a kolko zane dostal bodov
+- be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
+- fe - fixnut endpoint `/api/user/generate` tak aby returnol chybnu message v pripade ze ziadne priklady nie su zvolene pre riesenie (prikldy voli ucitel v sekcii insert).
+- zmenit `LatexFile` model tak, aby mu ucitel vedel nastavit maximalny pocet bodov, ktory sa potom bude pri generacii prikladov z daneho suboru pridelovat
+- [x] many to many relationship medzi user a problem treba prerobit na dalsiu entitu a pridat do nej aj stlpce `solved`, `pocet_bodov`, a `maximalny_pocet_bodov`, aby bolo mozne trackovat, ktory student ktore priklady vyriesil a kolko zane dostal bodov
 - v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
 - investigate: ako dostat tuto haluz na server
 - docker composer nefunguje(to spravi IBAN)

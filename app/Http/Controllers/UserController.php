@@ -30,10 +30,8 @@ class UserController{
 
     $randomProblem = $allProblems[array_rand($allProblems)];
     $randomProblemUserEntity = new UserProblem();
-//    $randomProblemUserEntity->user_id = $user['id'];
-//    $randomProblemUserEntity->problem_id = $randomProblem['id'];
     $randomProblemUserEntity->solved = false;
-    $randomProblemUserEntity->max_points = $randomProblem['points'];
+    $randomProblemUserEntity->max_points = 5; //TODO: treba zmenit politiku bodov.
     $randomProblemUserEntity->points = 0;
 
     $randomProblemUserEntity->user()->associate($user);
