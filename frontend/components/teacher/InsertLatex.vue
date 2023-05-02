@@ -8,6 +8,10 @@
             <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
             <input class="form-control" type="file" id="latex-file" multiple>
           </div>
+          <div class="form-outline">
+            <input type="number" id="typeNumber" class="form-control" />
+            <label class="form-label" for="typeNumber">Počet bodov na zadanie</label>
+          </div>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -22,7 +26,6 @@ import {LATEX_GET, LATEX_POST} from "../../constants/edpoints";
 import TeacherTable from "./TeacherTable.vue";
 import AssignThesis from "./AssignThesis.vue";
 import { useToast } from "vue-toastification";
-import toast from "bootstrap/js/src/toast";
 
 export default {
   name: 'InsertLatex',
@@ -60,7 +63,8 @@ export default {
                 task: response[i].parsed[j].task,
                 // solution: response[i].parsed[j].solution,
                 solution: response[i].parsed[j].solution,
-                file_name: response[i].name
+                file_name: response[i].name,
+                points: response[i].points,
               });
             }
           }
@@ -76,10 +80,14 @@ export default {
       }
 
       const fileInput = document.querySelector('#latex-file');
+      const pointsInput = document.querySelector('#typeNumber');
+      const points = pointsInput.value;
+      console.log(points);
       const file = fileInput.files[0];
       const formData = new FormData();
       formData.append('file', file);
       formData.append('name', 'test');
+      formData.append('points', points);
 
       api.post(LATEX_POST, formData, {
         headers: {

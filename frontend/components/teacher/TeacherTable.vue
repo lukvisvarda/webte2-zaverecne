@@ -52,6 +52,10 @@ export default {
           label: 'Solution',
           field: 'solution',
         },
+        {
+          label: 'Points',
+          field: 'points',
+        },
 
       ],
     };

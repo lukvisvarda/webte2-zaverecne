@@ -9,7 +9,7 @@ class LatexFile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'file', 'parsed', 'assigned'];
+    protected $fillable = ['name', 'file', 'parsed', 'assigned', 'points'];
 
     protected $casts = [
         'parsed' => 'array'

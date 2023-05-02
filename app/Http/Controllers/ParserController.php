@@ -13,8 +13,8 @@ class  ParserController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('file');
+        $points = $request->input('points');
         $path = $file->store('latex');
-        $name = $request->name;
 
         $parser = new LatexParser();
         $parsedData = $parser->parse(Storage::get($path));
@@ -23,9 +23,10 @@ class  ParserController extends Controller
         $latex->name = $file->getClientOriginalName();
         $latex->file = Storage::get($path);
         $latex->parsed = $parsedData;
+        $latex->points = $points;
         $latex->save();
         foreach ($parsedData as $problem) {
-            var_dump($problem);
+//            var_dump($problem);
             $problem2 = new Problem;
             $problem2->name = $problem['name'];
             $problem2->task = $problem['task'];
