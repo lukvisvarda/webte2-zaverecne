@@ -18,6 +18,13 @@
         <label for="password_confirmation ">Potvrd Heslo</label>
         <input class="form-control" type="password" id="password_confirmation " v-model="userData.password_confirmation ">
 
+        <select v-model="userData.role" class="form-select form-select my-3" aria-label=".form-select-sm example">
+          <option selected>Vyber rolu</option>
+          <option value="student">Študent</option>
+          <option value="teacher">Učiteľ</option>
+        </select>
+        <div v-if="this.errors.role" class="text-danger">{{ this.errors.role[0] }}</div>
+
         <input type="submit" value="Zaregistrovať" class="btn btn-primary"/>
       </div>
     </div>
@@ -39,6 +46,7 @@ export default {
         email: '',
         password: '',
         password_confirmation : '',
+        role: 'Vyber rolu'
       },
       errors: {}
     }

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Enums\RolesEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules\Enum;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
@@ -38,12 +40,14 @@ class AuthController
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|unique:users|max:255',
       'password' => 'required|string|min:8|max:255|confirmed',
+      'role' => ['required', new Enum(RolesEnum::class)],
     ]);
 
     $user = User::create([
       'name' => $validatedData['name'],
       'email' => $validatedData['email'],
       'password' => Hash::make($validatedData['password']),
+      'role' => $validatedData['role'],
     ]);
 
     $token = JWTAuth::fromUser($user);
