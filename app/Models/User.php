@@ -15,7 +15,9 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
+  public mixed $assignedProblems = array();
+
+  /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -27,6 +29,13 @@ class User extends Authenticatable implements JWTSubject
         'aisId',
         'role',
     ];
+
+//    public function assignedProblems(){
+//      return $this->belongsToMany(Problem::class);
+//    }
+    public function assignedProblems(){
+      return $this->hasMany(UserProblem::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

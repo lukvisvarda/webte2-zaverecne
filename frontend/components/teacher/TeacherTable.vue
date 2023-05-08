@@ -24,6 +24,15 @@ export default {
     VueGoodTable,
     Task
   },
+
+  props: {
+    rows: {
+      type: Array,
+      default: () => [],
+      required: true
+    },
+  },
+
   data() {
     return {
       columns: [
@@ -43,36 +52,19 @@ export default {
           label: 'Solution',
           field: 'solution',
         },
+        {
+          label: 'Points',
+          field: 'points',
+        },
 
       ],
-      rows: [],
     };
   },
   mounted() {
-    this.fetchData();
+    // this.fetchData();
   },
   methods: {
-    fetchData() {
-      api.get(LATEX_GET)
-        .then(response => {
-          //loop through the response and push the data to the rows array
-          for (let i = 0; i < response.length; i++) {
-            // loop over parsed data and push to rows
-            for(let j = 0; j < response[i].parsed.length; j++){
-              this.rows.push({
-                name: response[i].parsed[j].name,
-                task: response[i].parsed[j].task,
-                // solution: response[i].parsed[j].solution,
-                solution: response[i].parsed[j].solution,
-                file_name: response[i].name
-              });
-            }
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
+
   },
 };
 </script>

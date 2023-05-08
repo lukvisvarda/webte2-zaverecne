@@ -28,6 +28,7 @@ app.use(Toast, {
   newestOnTop: true,
 });
 app.use(router);
+
 store.dispatch('init').then(() => {
   console.log("after init");
   app.mount('#app');

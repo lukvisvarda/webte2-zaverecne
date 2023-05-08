@@ -17,6 +17,7 @@ return new class extends Migration
             $table->binary('file');
             $table->json('parsed')->nullable();
             $table->boolean('assigned')->default(false);
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
     }

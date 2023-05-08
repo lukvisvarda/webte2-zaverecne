@@ -10,6 +10,8 @@
       placeholder="Type to search or add tag"
       label="name"
       track-by="code"
+      @select="optionSelected"
+      @remove="removeTag"
     />
     <button class="btn btn-primary select-button" @click="submitSelection()">Potvrdiť</button>
   </div>
@@ -17,7 +19,7 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import api from "../../utils/api";
-import {LATEX_GET} from "../../constants/edpoints";
+import {ASSIGN_POST, LATEX_GET} from "../../constants/edpoints";
 import {reactive} from "vue";
 export default {
   name: "AssignThesis",
@@ -50,15 +52,39 @@ export default {
       selectedOptions.push(tag)
     };
 
+    const optionSelected = (selectedOption) => {
+      if (selectedOption.$isTag) {
+        addTag(selectedOption.label);
+      } else {
+        selectedOptions.push(selectedOption);
+      }
+    }
+
+    const removeTag = (tag) => {
+      const index = selectedOptions.indexOf(tag)
+      if (index !== -1) {
+        selectedOptions.splice(index, 1)
+      }
+    }
+
     const submitSelection = () => {
-      console.log("WATAFAAAK",selectedOptions);
+      console.log(selectedOptions.map(option => option.name))
+      api.post(ASSIGN_POST, {
+        selectedOptions: selectedOptions.map(option => option.name)
+      }).then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      })
     };
 
     return {
       options,
       selectedOptions,
       addTag,
+      optionSelected,
       submitSelection,
+      removeTag
     };
   },
 }

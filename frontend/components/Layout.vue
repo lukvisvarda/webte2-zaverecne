@@ -24,6 +24,9 @@
           <router-link class="nav-link" to="/insert">
             insert
           </router-link>
+          <router-link to="/student"  class="nav-link">
+            student
+          </router-link>
           <button class="nav-link" v-on:click="handleLogout" v-if="isLoggedInComputed">logout</button>
         </div>
       </div>

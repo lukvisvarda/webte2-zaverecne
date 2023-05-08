@@ -9,19 +9,39 @@
         <router-link to="/insert">
           <button>insert</button>
         </router-link>
+      <MathEditor :on-value-change="handleMathEditorChange"></MathEditor>
+      <button @click="handleClick">Click me </button>
     </div>
 </template>
 
 <script>
+import MathEditor from "./editor/MathEditor.vue";
+
 export default {
     name: "HelloWorld",
+  components: {MathEditor},
     props: {
         msg: String,
     },
+  data(){
+      return {
+          value: 'f(x) = ',
+          rendered: ''
+      }
+  },
+
+  methods:{
+      handleMathEditorChange(value) {
+          console.log("handleMathEditorChange")
+          this.value = value;
+      },
+      handleClick(){
+          console.log(this.value)
+      }
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
     margin: 40px 0 0;
