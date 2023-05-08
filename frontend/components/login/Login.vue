@@ -12,8 +12,10 @@
         <input class="form-control" type="password" placeholder="Heslo" id="password" v-model="password">
         <div v-if="passwordError" class="text-danger">{{ passwordError }}</div>
 
-        <input type="submit" class="btn btn-primary"/>
-        <RouterLink to="/register"  class="btn btn-primary">Registrovať sa</RouterLink>
+        <div class="my-row">
+          <input type="submit" class="btn btn-primary"/>
+          <RouterLink to="/register"  class="btn btn-primary">Registrovať sa</RouterLink>
+        </div>
       </div>
     </div>
 
@@ -130,5 +132,11 @@ export default{
 
 .btn{
   margin-top: 8px;
+}
+
+.my-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
