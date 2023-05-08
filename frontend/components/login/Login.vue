@@ -13,11 +13,10 @@
         <div v-if="passwordError" class="text-danger">{{ passwordError }}</div>
 
         <input type="submit" class="btn btn-primary"/>
+        <RouterLink to="/register"  class="btn btn-primary">Registrovať sa</RouterLink>
       </div>
     </div>
 
-    <latex :str="this.latexKokotina"></latex>
-    <task zadanie=""></task>
   </form>
 </template>
 
@@ -61,7 +60,6 @@ export default{
       password: '',
       emailError: '',
       passwordError: '',
-      latexKokotina: "\\dfrac{10}{20}",
       loginSuccess: false,
     }
   },
