@@ -3,7 +3,7 @@
   <form @submit.prevent="onSubmit">
     <div class="full-page">
 
-      <div class="form-wrapper">
+      <div class="form-wrapper d-flex flex-md-column">
         <label for="email">Email</label>
         <input class="form-control" type="email" placeholder="E-mail" id="email" v-model="email">
         <div v-if="emailError" class="text-danger">{{ emailError }}</div>
@@ -11,11 +11,8 @@
         <label for="password">Heslo</label>
         <input class="form-control" type="password" placeholder="Heslo" id="password" v-model="password">
         <div v-if="passwordError" class="text-danger">{{ passwordError }}</div>
-
-        <div class="my-row">
           <input type="submit" class="btn btn-primary"/>
           <RouterLink to="/register"  class="btn btn-primary">Registrovať sa</RouterLink>
-        </div>
       </div>
     </div>
 
@@ -121,6 +118,7 @@ export default{
   background: aliceblue;
   padding: 16px 32px;
   border-radius: 8px;
+
 }
 
 .full-page{

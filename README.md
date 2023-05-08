@@ -13,6 +13,7 @@ Vue sa nachadza v priečinku `frontend`.
 - investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.)
 - investigate: ako dostat tuto haluz na server
 - investigate: po zmenseni okna sa do*ebe navbar, vyriesit
+- fe - pohrat sa s responzivitou 
 - be + fe - pridat moznost ucitela skontrolovat pracu studentov, kto ma kolko bodov, ktore ulohy riesil apod
 - be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
 - v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
