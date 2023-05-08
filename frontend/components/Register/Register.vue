@@ -65,7 +65,7 @@ export default {
             this.toast('Registration was successful');
           } else {
             this.errors = store.getters.getAuthErrors;
-            this.toast('Wrong credentials');
+            this.errToast('Something went wrong');
           }
         })
         .catch(errors => {
@@ -75,8 +75,11 @@ export default {
     redirect(to) {
       this.$router.push(to);
     },
-    toast(msg) {
+    errToast(msg) {
       useToast().error(msg);
+    },
+    toast(msg) {
+      useToast().success(msg);
     }
   }
 }
