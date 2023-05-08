@@ -18,11 +18,8 @@
           <router-link class="nav-link" to="/login" v-if="!this.isLoggedInComputed">
             login
           </router-link>
-          <router-link class="nav-link" to="/latex">
-            latex
-          </router-link>
           <router-link class="nav-link" to="/insert">
-            insert
+            teacher
           </router-link>
           <router-link to="/student"  class="nav-link">
             student

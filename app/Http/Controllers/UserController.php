@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Enums\RolesEnum;
 use App\Models\LatexFile;
 use App\Models\Problem;
 use App\Models\selectedFile;
@@ -47,5 +48,10 @@ class UserController{
 //    }
 //    $user->save();
     return response()->json($randomProblem);
+  }
+
+  public function getAllStudents(){// give me only users with role student
+    $users = User::where('role', RolesEnum::STUDENT)->get();
+    return response()->json($users);
   }
 }

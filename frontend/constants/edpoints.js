@@ -9,4 +9,8 @@ export const ASSIGN_POST = 'api/latex/assign';
 
 export const GENERATE_POST = 'api/user/generate';
 
+export const ASSIGN_GET = 'api/latex/assign'
+
+export const STUDENT_GET = 'api/user/student'
+
 

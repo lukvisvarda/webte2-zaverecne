@@ -41,5 +41,11 @@ Route::middleware('jwt.auth')->post('/latex/assign', [AssignThesisController::cl
 
 Route::middleware('jwt.auth')->post('/user/generate', [UserController::class, 'addRandomProblemFromSelectedLatexFiles']);
 
+Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::class, 'getAssignedThesis']);
+
+Route::middleware('jwt.auth')->get('/user/student', [UserController::class, 'getAllStudents']);
+
+Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::class, 'getAssignedThesis']);
+
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 

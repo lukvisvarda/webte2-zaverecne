@@ -18,6 +18,9 @@
         <label for="password_confirmation ">Potvrd Heslo</label>
         <input class="form-control" type="password" id="password_confirmation " v-model="userData.password_confirmation ">
 
+        <label for="ais_id">Ais id</label>
+        <input class="form-control" type="text" id="ais_id" v-model="userData.aisId">
+
         <select v-model="userData.role" class="form-select form-select my-3" aria-label=".form-select-sm example">
           <option selected>Vyber rolu</option>
           <option value="student">Študent</option>
@@ -46,7 +49,8 @@ export default {
         email: '',
         password: '',
         password_confirmation : '',
-        role: 'Vyber rolu'
+        role: 'Vyber rolu',
+        aisId: ''
       },
       errors: {}
     }

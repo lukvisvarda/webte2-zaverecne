@@ -5,6 +5,7 @@ mix.js('frontend/app.js', 'public/js')
     // .sass('resources/sass/app.scss', 'public/css')
     .vue()
     .webpackConfig({
+
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, 'frontend'),

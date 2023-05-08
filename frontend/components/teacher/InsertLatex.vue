@@ -1,37 +1,44 @@
 <template>
   <div>
-
-      <AssignThesis/>
-      <div class="select">
-        <form @submit.prevent="submitForm">
-          <div class="mb-3">
-            <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
-            <input class="form-control" type="file" id="latex-file" multiple>
-          </div>
-          <div class="form-outline">
-            <input type="number" id="typeNumber" class="form-control" />
-            <label class="form-label" for="typeNumber">Počet bodov na zadanie</label>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+      <div v-if="isLoading" class="loading">
+          <VueSpinnerHourglass :size="100" color="#0d6efd"/>
       </div>
-      <TeacherTable :rows="rows"/>
+      <div v-else>
+        <AssignThesis :options="options" :initial-selected-options="selectedOptions"/>
+        <div class="select">
+          <form @submit.prevent="submitForm">
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
+              <input class="form-control" type="file" id="latex-file" multiple>
+            </div>
+            <div class="form-outline">
+              <input type="number" id="typeNumber" class="form-control" min="0"/>
+              <label class="form-label" for="typeNumber">Počet bodov na zadanie</label>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <TeacherTable :rows="rows"/>
+      </div>
   </div>
 </template>
 
 <script>
 
 import api from "../../utils/api";
-import {LATEX_GET, LATEX_POST} from "../../constants/edpoints";
+import {ASSIGN_GET, LATEX_GET, LATEX_POST} from "../../constants/edpoints";
 import TeacherTable from "./TeacherTable.vue";
 import AssignThesis from "./AssignThesis.vue";
 import { useToast } from "vue-toastification";
+import { VueSpinnerHourglass } from 'vue3-spinners'
+
 
 export default {
   name: 'InsertLatex',
   components: {
     TeacherTable,
-    AssignThesis
+    AssignThesis,
+    VueSpinnerHourglass
   },
 
   setup(){
@@ -43,7 +50,10 @@ export default {
 
   data(){
     return {
+      isLoading: true,
       rows: [],
+      options: [],
+      selectedOptions: [],
     }
   },
 
@@ -51,27 +61,38 @@ export default {
     this.fetchData();
   },
   methods: {
-    fetchData() {
-      api.get(LATEX_GET)
-        .then(response => {
-          //loop through the response and push the data to the rows array
-          for (let i = 0; i < response.length; i++) {
-            // loop over parsed data and push to rows
-            for(let j = 0; j < response[i].parsed.length; j++){
-              this.rows.push({
-                name: response[i].parsed[j].name,
-                task: response[i].parsed[j].task,
-                // solution: response[i].parsed[j].solution,
-                solution: response[i].parsed[j].solution,
-                file_name: response[i].name,
-                points: response[i].points,
-              });
-            }
-          }
-        })
-        .catch(error => {
-          console.error(error);
+    async fetchData() {
+      let response = await api.get(LATEX_GET);
+      for (let i = 0; i < response.length; i++) {
+        // loop over parsed data and push to rows
+        for(let j = 0; j < response[i].parsed.length; j++){
+          this.rows.push({
+            name: response[i].parsed[j].name,
+            task: response[i].parsed[j].task,
+            // solution: response[i].parsed[j].solution,
+            solution: response[i].parsed[j].solution,
+            file_name: response[i].name,
+            points: response[i].points,
+          });
+        }
+      }
+      this.options.splice(0, this.options.length);
+      for (let i = 0; i < response.length; i++) {
+        // loop over parsed data and push to options array
+
+        this.options.push({
+          name: response[i].name,
+          code: response[i].name
         });
+      }
+
+      response = await api.get(ASSIGN_GET);
+      for (let i = 0; i < response.selectedFiles.length; i++) {
+        this.selectedOptions.push(response.selectedFiles[i])
+      }
+
+
+      this.isLoading = false;
     },
     submitForm() {
       //if there are no files selected, return
@@ -108,3 +129,12 @@ export default {
   }
 }
 </script>
+
+<style>
+  .loading{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

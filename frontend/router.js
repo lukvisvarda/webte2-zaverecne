@@ -8,7 +8,7 @@ import Task from "./components/latex/Task.vue";
 import Insert from "./components/teacher/InsertLatex.vue";
 import store from './store/store';
 import StudentsPage from "./components/student/StudentsPage.vue";
-
+import Overview from "./components/teacher/overview/Overview.vue";
 // Vue.use(VueRouter);
 
 const routes = [
@@ -27,6 +27,12 @@ const routes = [
   },
   {
     path: '/student', component: StudentsPage, meta: { requiresAuth: true, requiresTeacher: false }
+  },
+  {
+    path: '/overview-teacher', component: Overview, meta: { requiresAuth: true, requiresTeacher: true }
+  },
+  {
+    path: '/overview-student', component: Latex, meta: { requiresAuth: true, requiresTeacher: true }
   }
 ];
 
@@ -60,6 +66,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+//role guard
 router.beforeEach((to, from, next) => {
 
   // console.log(store)

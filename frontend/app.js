@@ -27,9 +27,18 @@ app.use(Toast, {
   maxToasts: 20,
   newestOnTop: true,
 });
-app.use(router);
 
+
+console.log("start")
+
+// async function init(){
+//   await store.dispatch('init');
+//   app.mount('#app');
+// }
+// await init();
 store.dispatch('init').then(() => {
-  console.log("after init");
+  console.log("aoijsdoasjdoasjdoas", store.getters.getUser);
+  app.use(router);
   app.mount('#app');
+  console.log("After login")
 });

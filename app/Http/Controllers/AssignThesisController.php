@@ -28,4 +28,11 @@ class AssignThesisController extends Controller
 
     return response()->json(['message' => 'Selected options saved successfully.']);
   }
+
+
+
+  public function getAssignedThesis() {
+    $selectedFiles = selectedFile::all()[0];
+    return response()->json($selectedFiles);
+  }
 }

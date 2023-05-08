@@ -1,14 +1,5 @@
 <template>
     <div class="hello">
-        <router-link to="/login">
-            <button>login</button>
-        </router-link>
-        <router-link to="/latex">
-          <button>latex</button>
-        </router-link>
-        <router-link to="/insert">
-          <button>insert</button>
-        </router-link>
       <MathEditor :on-value-change="handleMathEditorChange"></MathEditor>
       <button @click="handleClick">Click me </button>
     </div>

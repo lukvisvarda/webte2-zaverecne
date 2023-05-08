@@ -41,6 +41,7 @@ class AuthController
       'email' => 'required|string|email|unique:users|max:255',
       'password' => 'required|string|min:8|max:255|confirmed',
       'role' => ['required', new Enum(RolesEnum::class)],
+      'aisId' => 'required|string|max:255',
     ]);
 
     $user = User::create([
@@ -48,6 +49,7 @@ class AuthController
       'email' => $validatedData['email'],
       'password' => Hash::make($validatedData['password']),
       'role' => $validatedData['role'],
+      'aisId' => $validatedData['aisId'],
     ]);
 
     $token = JWTAuth::fromUser($user);
