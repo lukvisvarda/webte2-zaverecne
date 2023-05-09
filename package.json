@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev-vite": "vite",
-    "build": "vite build",
+    "prod": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js --watch",
     "server:dev": "php artisan serve",
     "dev": "concurrently \"npm run development\" \"npm run server:dev\" \"npm run browser-sync\"",

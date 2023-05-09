@@ -9,7 +9,7 @@ services:
       - .:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
     ports:
-      - "8000:80"
+      - "80:80"
     depends_on:
       - db
   db:
