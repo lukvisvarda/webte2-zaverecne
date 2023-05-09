@@ -9,6 +9,7 @@ import Insert from "./components/teacher/InsertLatex.vue";
 import store from './store/store';
 import StudentsPage from "./components/student/StudentsPage.vue";
 import Overview from "./components/teacher/overview/Overview.vue";
+import StudentOverview from "./components/teacher/overview/StudentOverview.vue";
 // Vue.use(VueRouter);
 
 const routes = [
@@ -33,6 +34,9 @@ const routes = [
   },
   {
     path: '/overview-student', component: Latex, meta: { requiresAuth: true, requiresTeacher: true }
+  },
+  {
+    path: "/teacher/student/:id", component:StudentOverview, meta: { requiresAuth: true, requiresTeacher: true }
   }
 ];
 

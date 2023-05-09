@@ -87,8 +87,11 @@ export default {
       }
 
       response = await api.get(ASSIGN_GET);
-      for (let i = 0; i < response.selectedFiles.length; i++) {
-        this.selectedOptions.push(response.selectedFiles[i])
+      if(response.selectedFiles){
+
+        for (let i = 0; i < response.selectedFiles.length; i++) {
+          this.selectedOptions.push(response.selectedFiles[i])
+        }
       }
 
 

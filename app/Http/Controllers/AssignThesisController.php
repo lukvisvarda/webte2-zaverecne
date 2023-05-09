@@ -31,8 +31,9 @@ class AssignThesisController extends Controller
 
 
 
-  public function getAssignedThesis() {
-    $selectedFiles = selectedFile::all()[0];
-    return response()->json($selectedFiles);
+  public function  getAssignedThesis() {
+    $selectedFiles = selectedFile::all();
+      if(count($selectedFiles) == 0) return response()->json($selectedFiles);
+    return response()->json($selectedFiles[0]);
   }
 }
