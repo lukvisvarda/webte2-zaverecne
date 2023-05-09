@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssignThesisController;
 use App\Http\Controllers\ParserController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProblemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -41,11 +42,16 @@ Route::middleware('jwt.auth')->post('/latex/assign', [AssignThesisController::cl
 
 Route::middleware('jwt.auth')->post('/user/generate', [UserController::class, 'addRandomProblemFromSelectedLatexFiles']);
 
+Route::middleware('jwt.auth')->get('/user/{id}/problems', [UserProblemController::class, 'getProblemsByStudentId']);
+
+Route::middleware('jwt.auth')->get('/user-problem', [UserProblemController::class, 'getAll']);
+
 Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::class, 'getAssignedThesis']);
 
 Route::middleware('jwt.auth')->get('/user/student', [UserController::class, 'getAllStudents']);
 
 Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::class, 'getAssignedThesis']);
 
+Route::middleware('jwt.auth')->get("/user/{id}", [UserController::class, "getUserById"]);
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 

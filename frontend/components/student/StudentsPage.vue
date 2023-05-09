@@ -16,8 +16,11 @@ export default {
   setup() {
     const toast = useToast();
     return {
-      toast: function (msg) {
+      toastErr: function (msg) {
         toast.error(msg)
+      },
+      toastSuccess: function (msg) {
+        toast.success(msg)
       },
     }
   },
@@ -25,13 +28,13 @@ export default {
   methods: {
     async generate() {
       const problem = await api.post(GENERATE_POST);
-      //if there are no tasks to generate, return
-      if(problem.length === 0){
-        this.toast("Nemáte žiadne úlohy na vygenerovanie");
+      if(problem.message){
+        this.toastErr("Nemáte žiadne úlohy na vygenerovanie");
         return;
       }
+      this.toastSuccess("Úloha bola vygenerovaná");
+      //if there are no tasks to generate, return
 
-      console.log(problem);
     },
     seeTasks() {
       console.log("seeTasks")

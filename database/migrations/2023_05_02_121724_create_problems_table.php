@@ -16,6 +16,7 @@ return new class extends Migration
           $table->foreignId('user_id')->constrained()->onDelete('cascade');
           $table->foreignId('problem_id')->constrained()->onDelete('cascade');
           $table->boolean('solved')->default(false);
+          $table->boolean('submitted')->default(false);
           $table->integer('max_points')->nullable();
           $table->integer('points')->nullable();
           $table->timestamps();

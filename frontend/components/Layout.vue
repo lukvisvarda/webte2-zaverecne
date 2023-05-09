@@ -24,6 +24,9 @@
           <router-link to="/student"  class="nav-link">
             student
           </router-link>
+          <router-link to="/overview-teacher"  class="nav-link">
+            overview-teacher
+          </router-link>
           <button class="nav-link" v-on:click="handleLogout" v-if="isLoggedInComputed">logout</button>
         </div>
       </div>

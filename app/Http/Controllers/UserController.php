@@ -10,6 +10,12 @@ use App\Models\UserProblem;
 use Illuminate\Support\Facades\Auth;
 
 class UserController{
+
+  public function getUserById($id){
+    $user = User::find($id);
+    return response()->json($user);
+  }
+
   public function addRandomProblemFromSelectedLatexFiles(){
     $user =  Auth::user();
 
@@ -17,6 +23,7 @@ class UserController{
     if(count(selectedFile::all()) == 0){
       return response()->json();
     }
+
     $selectedFiles = selectedFile::all()[0]['selectedFiles'];
 
     $arr = $selectedFiles ;
@@ -34,19 +41,38 @@ class UserController{
       }
     }
 
-    $randomProblem = $allProblems[array_rand($allProblems)];
+//    $solvedProblems = $user->assignedProblems()->where('solved', true)->pluck('id')->toArray();
+//    $assignedProblems = $user->assignedProblems()->map(function($problem){
+//      return $problem->id;
+//    });
+    $assignedProblems = $user->assignedProblems()->pluck('problem_id')->toArray();
+
+//    var_dump($user->assignedProblems());
+
+    // filter out the problems that the user has already solved
+//    $unsolvedProblems = array_filter($allProblems, function ($problem) use ($solvedProblems) {
+//      return !in_array($problem->id, $solvedProblems);
+//    });
+
+    $unsolvedProblems = array_filter($allProblems, function ($problem) use ($assignedProblems) {
+      return !in_array($problem->id, $assignedProblems);
+    });
+
+
+    if (empty($unsolvedProblems)) {
+      // if the user has already solved all the problems, return an empty response
+      return response()->json(["message"=>"Nemáte žiadne úlohy na vygenerovanie"]);
+    }
+
+    $randomProblem = $unsolvedProblems[array_rand($unsolvedProblems)];
     $randomProblemUserEntity = new UserProblem();
     $randomProblemUserEntity->solved = false;
-    $randomProblemUserEntity->max_points = 5; //TODO: treba zmenit politiku bodov.
+    $randomProblemUserEntity->max_points = 5;
     $randomProblemUserEntity->points = 0;
 
     $randomProblemUserEntity->user()->associate($user);
     $randomProblemUserEntity->problem()->associate($randomProblem);
     $randomProblemUserEntity->save();
-//    if($user instanceof User){
-//      $user->assignedProblems()->attach($randomProblem['id']);
-//    }
-//    $user->save();
     return response()->json($randomProblem);
   }
 

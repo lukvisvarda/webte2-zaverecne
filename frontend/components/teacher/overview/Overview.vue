@@ -4,7 +4,7 @@
       <VueSpinnerHourglass :size="100" color="#0d6efd"/>
     </div>
     <div v-else>
-      <vue-good-table :columns="columns" :rows="rows" style="margin-left: 50px; margin-right: 50px; margin-bottom: 50px">
+      <vue-good-table :columns="columns" :rows="rows" style="margin-left: 50px; margin-right: 50px; margin-top: 50px">
         <template v-slot:table-row="props">
           <span v-if="props.column.field === 'id' || props.column.field === 'name' || props.column.field === 'surname'">{{ props.formattedRow[props.column.field] }}</span>
           <span v-if="props.column.field === 'action'">

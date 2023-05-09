@@ -9,7 +9,7 @@ class UserProblem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'problem_id', 'solved', 'max_points', 'points'];
+    protected $fillable = ['user_id', 'problem_id', 'solved', 'max_points', 'points', 'submitted'];
 
     public function user()
     {

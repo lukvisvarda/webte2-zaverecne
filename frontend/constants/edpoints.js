@@ -13,4 +13,12 @@ export const ASSIGN_GET = 'api/latex/assign'
 
 export const STUDENT_GET = 'api/user/student'
 
+export const PROBLEM_BY_USER_GET = function (id) {
+  return `api/user/${id}/problems`
+}
+
+export const GET_USER_BY_ID = function (id){ return `api/user/${id}`;}
+
+
+
 

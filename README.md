@@ -16,11 +16,11 @@ Vue sa nachadza v priečinku `frontend`.
 - fe - pohrat sa s responzivitou 
 - fe - z navbaru dat prec buttony podla danej roly ktora je prihlasena (teacher -> ucitel), (student -> student)
 - be + fe - pod tagy pridat pre kazdy tag (priradenu ulohu) aj cas odomknutia pre danu ulohu v componente `AssignThesis`
-- be + fe - pridat moznost ucitela skontrolovat pracu studentov, kto ma kolko bodov, ktore ulohy riesil apod
 - be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
 - be - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)
 - v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
 - docker composer nefunguje(to spravi IBAN)
+- [x] be + fe - pridat moznost ucitela skontrolovat pracu studentov, kto ma kolko bodov, ktore ulohy riesil apod
 - [x] be - authguard na backende(aby non logged user nevedel robit requesty)
 - [x] funkcionalita ucitela na vyberanie prikladov (backend + frontend)
 - [x] fe - fixnut endpoint `/api/user/generate` tak aby returnol chybnu message v pripade ze ziadne priklady nie su zvolene pre riesenie (prikldy voli ucitel v sekcii insert).

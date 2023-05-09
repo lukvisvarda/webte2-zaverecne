@@ -19,7 +19,7 @@
 <script>
 import VueMultiselect from 'vue-multiselect'
 import api from "../../utils/api";
-import {ASSIGN_POST, LATEX_GET} from "../../constants/edpoints";
+import {ASSIGN_POST} from "../../constants/edpoints";
 import {reactive} from "vue";
 import { useToast } from "vue-toastification";
 
@@ -44,20 +44,6 @@ export default {
     console.log(props.initialSelectedOptions, "ASUJIODGBASOUIDG");
     // const options = reactive([]);
     let selectedOptions = reactive([]);
-
-    // api.get(LATEX_GET)
-    //   .then(response => {
-    //     // Clear options array before pushing new values
-    //     options.splice(0, options.length);
-    //     //loop through the response and push the data to the options array
-    //     for (let i = 0; i < response.length; i++) {
-    //       // loop over parsed data and push to options array
-    //       options.push({
-    //         name: response[i].name,
-    //         code: response[i].name
-    //       });
-    //     }
-    //   });
 
     const addTag = (newTag) => {
       const tag = {
