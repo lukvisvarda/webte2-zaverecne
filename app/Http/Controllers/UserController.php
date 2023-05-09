@@ -31,12 +31,13 @@ class UserController{
 
     foreach ($arr as $fileId) {
       $latexFile = LatexFile::findByName($fileId);
-      $actualLatexFiles[] = $latexFile;
+      $actualLatexFiles[] = $latexFile; // tu su aj ti ebody
     }
 
     $allProblems = array();
     foreach ($actualLatexFiles as $latexFile) {
       foreach ($latexFile->problems as $problem) {
+        $problem->points = $latexFile->points;
         $allProblems[] = $problem;
       }
     }
@@ -67,7 +68,7 @@ class UserController{
     $randomProblem = $unsolvedProblems[array_rand($unsolvedProblems)];
     $randomProblemUserEntity = new UserProblem();
     $randomProblemUserEntity->solved = false;
-    $randomProblemUserEntity->max_points = 5;
+    $randomProblemUserEntity->max_points = $randomProblem->points;
     $randomProblemUserEntity->points = 0;
 
     $randomProblemUserEntity->user()->associate($user);
