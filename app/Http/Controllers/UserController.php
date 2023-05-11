@@ -7,7 +7,9 @@ use App\Models\Problem;
 use App\Models\selectedFile;
 use App\Models\User;
 use App\Models\UserProblem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use NunoMaduro\Collision\Writer;
 
 class UserController{
 
@@ -81,4 +83,49 @@ class UserController{
     $users = User::where('role', RolesEnum::STUDENT)->get();
     return response()->json($users);
   }
+
+  public function downloadCSV(Request $request)
+  {
+    $tempFile = tmpfile();
+
+//    $jsonData = $request->validate([
+//      'id' => 'required|integer',
+//      'name'=> 'required|string',
+//      'email'=> 'required|string',
+//      'counter_generation'=> 'required|integer',
+//      'counter_submitted'=> 'required|integer',
+//      'points_earned'=> 'required|integer'
+//
+//    ]);
+    $jsonData = $request->all();
+
+    // Write the data to the temporary file
+    $header = array_keys($jsonData[0]);
+    fputcsv($tempFile, $header);
+    foreach ($jsonData as $row) {
+      fputcsv($tempFile, $row);
+    }
+
+    // Seek to the beginning of the temporary file
+    rewind($tempFile);
+
+    // Set the HTTP headers for a CSV file download
+    $headers = [
+      'Content-Type' => 'text/csv',
+      'Content-Disposition' => 'attachment; filename="data.csv"',
+    ];
+
+    // Return the CSV file as a response
+    return response(stream_get_contents($tempFile), 200, $headers);
+  }
 }
+
+//    $jsonData = $request->validate([
+//      'id' => 'required|integer',
+//          'name'=> 'required|string',
+//          'email'=> 'required|string',
+//          'counter_generation'=> 'required|integer',
+//          'counter_submitted'=> 'required|integer',
+//          'points_earned'=> 'required|integer'
+//
+//    ])

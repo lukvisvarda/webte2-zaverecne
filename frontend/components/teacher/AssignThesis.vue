@@ -76,7 +76,7 @@ export default {
     const submitSelection = () => {
       // console.log(this.selectedOptions.map(option => option.name))
       api.post(ASSIGN_POST, {
-        selectedOptions: selectedOptions.map(option => option.name)
+        selectedOptions: selectedOptions.map(option => option.name),
       }).then(response => {
         console.log(response);
         toast.success(response.message)

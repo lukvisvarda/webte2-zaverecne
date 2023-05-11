@@ -1,7 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -18,10 +17,10 @@
           <router-link class="nav-link" to="/login" v-if="!this.isLoggedInComputed">
             login
           </router-link>
-          <router-link class="nav-link" to="/insert">
+          <router-link v-if="store.getters.getUser.role === 'teacher'" class="nav-link" to="/insert">
             teacher
           </router-link>
-          <router-link to="/student"  class="nav-link">
+          <router-link v-if="store.getters.getUser.role === 'student'" to="/student"  class="nav-link">
             student
           </router-link>
           <router-link to="/overview-teacher"  class="nav-link">

@@ -8,7 +8,7 @@ Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
 Vue sa nachadza v priečinku `frontend`.
 
 # Davam do povedomia:
-- pri generovani prikladov na route `/student` je potrebne najprv cez ucitela pridat subor a nastavit ho pre generovanie, inak to nepojde
+- Nie je implementované pridávanie zadaní podľa času.
 ## TODOS:
 - investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.)
 - investigate: ako dostat tuto haluz na server

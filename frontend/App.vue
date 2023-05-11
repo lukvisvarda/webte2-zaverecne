@@ -1,6 +1,6 @@
 <template>
   <div>
-    <layout></layout>
+    <layout v-if="isLoggedIn"></layout>
     <RouterView></RouterView>
   </div>
 </template>
@@ -9,9 +9,22 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/login/Login.vue';
 import Layout from "./components/Layout.vue";
+import {useStore} from "vuex";
 
 export default {
   name: 'App',
+  setup(){
+    const store = useStore();
+    return{
+      store,
+    }
+  },
+  computed: {
+    isLoggedIn(){
+      return this.store.getters.isLoggedIn;
+    }
+  },
+
   components: {
     Layout,
     HelloWorld,

@@ -20,7 +20,7 @@ class AssignThesisController extends Controller
     selectedFile::truncate();
 
       selectedFile::create([
-        'selectedFiles' => $selectedOptions
+        'selectedFiles' => $selectedOptions,
       ]);
 
 

@@ -7,6 +7,8 @@
 
 <script>
 import MathEditor from "./editor/MathEditor.vue";
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 
 export default {
     name: "HelloWorld",
@@ -14,11 +16,37 @@ export default {
     props: {
         msg: String,
     },
+  setup(){
+    const store = useStore();
+    const router = useRouter();
+    const isLoggedIn = store.getters.isLoggedIn;
+    if(!isLoggedIn){
+      router.push('/login');
+      // location.reload();
+    }
+    return{
+      user: store.getters.getUser,
+      isLoggedIn: store.getters.isLoggedIn,
+      router
+    }
+  },
   data(){
       return {
           value: 'f(x) = ',
           rendered: ''
       }
+  },
+
+  mounted() {
+
+      if(this.isLoggedIn && this.user.role === 'teacher'){
+        this.router.push('/insert');
+      }
+
+    if(this.isLoggedIn && this.user.role === 'student'){
+      this.router.push('/student');
+    }
+
   },
 
   methods:{
