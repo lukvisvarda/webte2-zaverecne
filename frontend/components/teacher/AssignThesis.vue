@@ -13,33 +13,34 @@
       @select="optionSelected"
       @remove="removeTag"
     />
-    <button class="btn btn-primary select-button" @click="submitSelection()">Potvrdiť</button>
+    <button class="btn btn-dark select-button" @click="submitSelection()">
+      Potvrdiť
+    </button>
   </div>
 </template>
 <script>
-import VueMultiselect from 'vue-multiselect'
+import VueMultiselect from "vue-multiselect";
 import api from "../../utils/api";
-import {ASSIGN_POST} from "../../constants/edpoints";
-import {reactive} from "vue";
+import { ASSIGN_POST } from "../../constants/edpoints";
+import { reactive } from "vue";
 import { useToast } from "vue-toastification";
 
 export default {
   name: "AssignThesis",
-  components: {VueMultiselect},
+  components: { VueMultiselect },
 
-  props:{
+  props: {
     options: {
       type: Array,
-      required: true
+      required: true,
     },
     initialSelectedOptions: {
       type: Array,
       required: true,
-    }
+    },
   },
 
   setup(props) {
-
     const toast = useToast();
     console.log(props.initialSelectedOptions, "ASUJIODGBASOUIDG");
     // const options = reactive([]);
@@ -48,10 +49,10 @@ export default {
     const addTag = (newTag) => {
       const tag = {
         name: newTag,
-        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-      }
-      this.options.push(tag)
-      selectedOptions.push(tag)
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.options.push(tag);
+      selectedOptions.push(tag);
     };
 
     const optionSelected = (selectedOption) => {
@@ -61,34 +62,37 @@ export default {
       } else {
         selectedOptions.push(selectedOption);
       }
-    }
+    };
 
     const removeTag = (tag) => {
-      console.log(tag)
+      console.log(tag);
       // const index = selectedOptions.indexOf(tag)
-      const found = selectedOptions.find(option => option.name === tag.name);
+      const found = selectedOptions.find((option) => option.name === tag.name);
       const index = selectedOptions.indexOf(found);
       if (index !== -1) {
-        selectedOptions.splice(index, 1)
+        selectedOptions.splice(index, 1);
       }
-    }
+    };
 
     const submitSelection = () => {
       // console.log(this.selectedOptions.map(option => option.name))
-      api.post(ASSIGN_POST, {
-        selectedOptions: selectedOptions.map(option => option.name),
-      }).then(response => {
-        console.log(response);
-        toast.success(response.message)
-      }).catch(error => {
-        toast.error(error.message)
-      })
+      api
+        .post(ASSIGN_POST, {
+          selectedOptions: selectedOptions.map((option) => option.name),
+        })
+        .then((response) => {
+          console.log(response);
+          toast.success(response.message);
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
     };
 
-    props.initialSelectedOptions.forEach(option => {
+    props.initialSelectedOptions.forEach((option) => {
       optionSelected({
         name: option,
-        code: option
+        code: option,
       });
     });
 
@@ -101,23 +105,22 @@ export default {
       removeTag,
     };
   },
-}
-
+};
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <style>
-  .select {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
-    flex-direction: column;
-    margin: 0 auto;
-  }
-  .select-button{
-    width:100%;
-    margin-bottom: 2rem
-  }
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.select-button {
+  width: 100%;
+  margin-bottom: 2rem;
+}
 </style>
