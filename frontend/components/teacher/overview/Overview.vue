@@ -8,7 +8,7 @@
         <template v-slot:table-row="props">
           <span v-if="props.column.field === 'id' || props.column.field === 'name' || props.column.field === 'surname'">{{ props.formattedRow[props.column.field] }}</span>
           <span v-if="props.column.field === 'action'">
-            <RouterLink :to="`/teacher/student/${props.formattedRow['id']}`" class="btn btn-primary" >Zobraziť študenta</RouterLink>
+            <RouterLink :to="`/teacher/student/${props.formattedRow['id']}`" class="btn btn-primary" >{{ $t('content.showStudent') }}</RouterLink>
           </span>
         </template>
       </vue-good-table>

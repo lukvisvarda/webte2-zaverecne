@@ -1,7 +1,7 @@
 <template>
   <div class="student-wrapper">
-    <button class="our-student-button" @click="generate">Generovať</button>
-    <button class="our-student-button" @click="seeTasks">Prehľad zadaných úloh</button>
+    <button class="our-student-button" @click="generate">{{ $t('content.generate') }}</button>
+    <button class="our-student-button" @click="seeTasks">{{ $t('content.tasksOverview') }}</button>
   </div>
 </template>
 
