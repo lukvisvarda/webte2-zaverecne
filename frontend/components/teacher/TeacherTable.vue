@@ -6,6 +6,12 @@
         <span v-if="props.column.field === 'task' || props.column.field === 'solution'">
           <Task :zadanie="props.formattedRow[props.column.field]"></Task>
         </span>
+        <template v-if="props.column.field === 'action'">
+          <form @submit.prevent="uploadImages(props.row)">
+            <input type="file" class="form-control" id="files" name="files" multiple @change="handleFileUpload">
+            <input type="submit" value="Upload image" class="btn btn-primary">
+          </form>
+        </template>
       </template>
     </vue-good-table>
   </div>
@@ -15,7 +21,7 @@
 import { VueGoodTable } from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
 import api from "../../utils/api";
-import {LATEX_GET} from "../../constants/edpoints";
+import {IMAGE_POST, LATEX_GET} from "../../constants/edpoints";
 import Task from "../latex/Task.vue";
 
 export default {
@@ -35,6 +41,7 @@ export default {
 
   data() {
     return {
+      selectedFiles: [],
       columns: [
         {
           label: 'File name',
@@ -56,7 +63,10 @@ export default {
           label: 'Points',
           field: 'points',
         },
-
+        {
+          label: 'Upload images',
+          field: 'action'
+        }
       ],
     };
   },
@@ -64,7 +74,24 @@ export default {
     // this.fetchData();
   },
   methods: {
+    handleFileUpload(event) {
+      this.selectedFiles = Array.from(event.target.files);
+    },
+    uploadImages(row) {
+      const formData = new FormData();
+      formData.append('name', row.name);
+      this.selectedFiles.forEach(file => {
+        formData.append('images[]', file);
+      });
 
+      api.post(IMAGE_POST, formData)
+        .then(response => {
+          console.log('Success:', response);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
   },
 };
 </script>

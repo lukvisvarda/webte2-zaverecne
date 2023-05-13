@@ -55,3 +55,7 @@ Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::cla
 Route::middleware('jwt.auth')->get("/user/{id}", [UserController::class, "getUserById"]);
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
+Route::middleware('jwt.auth')->get('/problems/{id}', [UserProblemController::class, 'getSingleProblem']);
+
+Route::middleware('jwt.auth')->post('/teacher/upload', [UserController::class, 'uploadImages']);
+
