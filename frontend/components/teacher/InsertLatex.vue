@@ -8,12 +8,12 @@
         <div class="select">
           <form @submit.prevent="submitForm">
             <div class="mb-3">
-              <label for="formFileMultiple" class="form-label">Vlož LaTex súbor:</label>
+              <label for="formFileMultiple" class="form-label">{{ $t('content.insertLaTex') }}:</label>
               <input class="form-control" type="file" id="latex-file" multiple>
             </div>
             <div class="form-outline">
               <input type="number" id="typeNumber" class="form-control" min="0"/>
-              <label class="form-label" for="typeNumber">Počet bodov na zadanie</label>
+              <label class="form-label" for="typeNumber">{{ $t('content.pointsForTask') }}</label>
             </div>
             <button type="submit">Submit</button>
           </form>

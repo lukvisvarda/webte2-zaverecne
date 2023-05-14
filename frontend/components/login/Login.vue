@@ -4,15 +4,15 @@
     <div class="full-page">
 
       <div class="form-wrapper d-flex flex-md-column">
-        <label for="email">Email</label>
+        <label for="email">{{ $t('auth.email') }}</label>
         <input class="form-control" type="email" placeholder="E-mail" id="email" v-model="email">
         <div v-if="emailError" class="text-danger">{{ emailError }}</div>
 
-        <label for="password">Heslo</label>
+        <label for="password">{{ $t('auth.password') }}</label>
         <input class="form-control" type="password" placeholder="Heslo" id="password" v-model="password">
         <div v-if="passwordError" class="text-danger">{{ passwordError }}</div>
           <input type="submit" class="btn btn-primary"/>
-          <RouterLink to="/register"  class="btn btn-primary">Registrovať sa</RouterLink>
+          <RouterLink to="/register"  class="btn btn-primary">{{ $t('auth.register') }}</RouterLink>
       </div>
     </div>
 

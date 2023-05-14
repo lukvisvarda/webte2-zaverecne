@@ -16,6 +16,26 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // Make BootstrapVue available throughout your project
 // Optionally install the BootstrapVue icon components plugin
 
+import { createI18n } from "vue-i18n";
+
+function loadLocaleMessages() {
+  const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.js$/i);
+  const messages = {};
+  locales.keys().forEach((key) => {
+    const matched = key.match(/([A-Za-z0-9-_]+)\./i);
+    if (matched && matched.length > 1) {
+      const locale = matched[1];
+      messages[locale] = locales(key).default;
+    }
+  });
+  return messages;
+}
+
+const i18n = createI18n({
+  legacy: true,
+  locale: 'sk',
+  messages: loadLocaleMessages()
+});
 
 const app = createApp(App);
 // app.use(BootstrapVue)
@@ -27,7 +47,7 @@ app.use(Toast, {
   maxToasts: 20,
   newestOnTop: true,
 });
-
+app.use(i18n);
 
 console.log("start")
 

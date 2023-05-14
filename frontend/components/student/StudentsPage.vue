@@ -1,17 +1,20 @@
 <template>
-  <div class="student-wrapper">
-    <button class="our-student-button" @click="generate">Generovať</button>
-    <button class="our-student-button" @click="seeTasks">Prehľad zadaných úloh</button>
+  <div class="d-flex justify-content-start mt-4">
+    <button type="button" class="btn btn-outline-success float-right" @click="generate"> {{ $t('content.generate') }} </button>
   </div>
+<!--  <button type="button" class="btn btn-secondary" @click="seeTasks"> Prehľad zadaných úloh </button>-->
+  <problems-table></problems-table>
 </template>
 
 <script>
 import api from "../../utils/api";
 import {GENERATE_POST} from "../../constants/edpoints";
 import {useToast} from "vue-toastification";
+import ProblemsTable from "./ProblemsTable.vue";
 
 export default {
   name: "StudentsPage",
+  components: { ProblemsTable },
 
   setup() {
     const toast = useToast();
@@ -47,6 +50,9 @@ export default {
 </script>
 
 <style scoped>
+  .btn {
+    margin-left: 50px;
+  }
   .student-wrapper {
     height: 90vh;
     display: flex;

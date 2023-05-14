@@ -16,20 +16,25 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" to="/login" v-if="!this.isLoggedInComputed">
-            login
+            {{ $t('navbar.login') }}
           </router-link>
           <router-link class="nav-link" to="/insert">
-            teacher
+            {{ $t('auth.teacher') }}
           </router-link>
           <router-link to="/student"  class="nav-link">
-            student
+            {{ $t('auth.student') }}
           </router-link>
           <router-link to="/overview-teacher"  class="nav-link">
-            overview-teacher
+            {{ $t('navbar.overviewTeacher') }}
           </router-link>
-          <button class="nav-link" v-on:click="handleLogout" v-if="isLoggedInComputed">logout</button>
+          <router-link to="/register"  class="nav-link">
+            {{ $t('navbar.register') }}
+          </router-link>
+          <button class="nav-link" v-on:click="handleLogout" v-if="isLoggedInComputed">{{ $t('navbar.logout') }}</button>
         </div>
+        <language-switcher></language-switcher>
       </div>
+
     </div>
   </nav>
 </template>
@@ -38,10 +43,11 @@
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 //import bootstrap classes used above
-
+import LanguageSwitcher from "./LanguageSwitcher.vue";
 
 export default {
   name: "Layout",
+  components: {LanguageSwitcher},
   setup() {
     const store = useStore();
     const router = useRouter();

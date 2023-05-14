@@ -7,7 +7,9 @@ use App\Models\Problem;
 use App\Models\selectedFile;
 use App\Models\User;
 use App\Models\UserProblem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController{
 
@@ -80,5 +82,24 @@ class UserController{
   public function getAllStudents(){// give me only users with role student
     $users = User::where('role', RolesEnum::STUDENT)->get();
     return response()->json($users);
+  }
+
+  public function uploadImages(Request $request)
+  {
+    $request->validate([
+      'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+      'name' => 'required|string',
+    ]);
+
+    foreach ($request->file('images') as $image) {
+      $path = $image->storeAs('public/images', $image->hashName());
+      $url = Storage::url($path);
+    }
+
+    $problem = Problem::where('name', $request->input('name'))->first();
+    $problem->image = $url;
+    $problem->save();
+
+    return response()->json(['message' => 'Images uploaded successfully']);
   }
 }
