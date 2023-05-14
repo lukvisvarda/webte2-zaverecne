@@ -1,37 +1,62 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
         type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <i class="fas fa-bars"></i>
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <router-link class="nav-link" to="/login" v-if="!this.isLoggedInComputed">
-            {{ $t('navbar.login') }}
-          </router-link>
-          <router-link class="nav-link" to="/insert">
-            {{ $t('auth.teacher') }}
-          </router-link>
-          <router-link to="/student"  class="nav-link">
-            {{ $t('auth.student') }}
-          </router-link>
-          <router-link to="/overview-teacher"  class="nav-link">
-            {{ $t('navbar.overviewTeacher') }}
-          </router-link>
-          <router-link to="/register"  class="nav-link">
-            {{ $t('navbar.register') }}
-          </router-link>
-          <button class="nav-link" v-on:click="handleLogout" v-if="isLoggedInComputed">{{ $t('navbar.logout') }}</button>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              to="/login"
+              v-if="!this.isLoggedInComputed"
+            >
+              {{ $t('navbar.login') }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              v-if="store.getters.getUser.role === 'teacher'"
+              class="nav-link"
+              to="/insert"
+            >
+              {{ $t('auth.teacher') }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              v-if="store.getters.getUser.role === 'student'"
+              to="/student"
+              class="nav-link"
+            >
+              {{ $t('auth.student') }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/overview-teacher" class="nav-link">
+              {{ $t('navbar.overviewTeacher') }}
+            </router-link>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+            v-on:click="handleLogout"
+            v-if="isLoggedInComputed"
+          >
+            {{ $t('navbar.logout') }}
+          </button>
+        </form>
         <language-switcher></language-switcher>
       </div>
 
@@ -74,5 +99,4 @@ export default {
     },
   },
 };
-
 </script>

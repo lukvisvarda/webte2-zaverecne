@@ -8,6 +8,8 @@ import store from './store/store';
 import Latex from "./components/latex/Latex.vue"
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import JsonCSV from 'vue-json-csv'
+
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -38,6 +40,7 @@ const i18n = createI18n({
 });
 
 const app = createApp(App);
+app.component('downloadCsv', JsonCSV)
 // app.use(BootstrapVue)
 // app.use(IconsPlugin)
 app.use(store);

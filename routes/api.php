@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignThesisController;
 use App\Http\Controllers\ParserController;
+use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProblemController;
 use Illuminate\Http\Request;
@@ -52,7 +53,13 @@ Route::middleware('jwt.auth')->get('/user/student', [UserController::class, 'get
 
 Route::middleware('jwt.auth')->get('/latex/assign', [AssignThesisController::class, 'getAssignedThesis']);
 
+Route::middleware('jwt.auth')->post("/user/csv", [UserController::class, "downloadCSV"]);
+
 Route::middleware('jwt.auth')->get("/user/{id}", [UserController::class, "getUserById"]);
+
+Route::middleware('jwt.auth')->get("/tutorial", [TutorialController::class, "getTutorial"]);
+
+Route::middleware('jwt.auth')->put("/tutorial", [TutorialController::class, "updateTutorial"]);
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
 Route::middleware('jwt.auth')->get('/problems/{id}', [UserProblemController::class, 'getSingleProblem']);
