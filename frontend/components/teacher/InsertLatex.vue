@@ -12,15 +12,15 @@
         <form @submit.prevent="submitForm">
           <div class="mb-3">
             <label for="formFileMultiple" class="form-label"
-              >{{ $t('content.insertLaTex') }}:</label
+              >{{ $t("content.insertLaTex") }}:</label
             >
             <input class="form-control" type="file" id="latex-file" multiple />
           </div>
           <div class="form-outline">
             <input type="number" id="typeNumber" class="form-control" min="0" />
-            <label class="form-label" for="typeNumber"
-              >{{ $t('content.pointsForTask') }}</label
-            >
+            <label class="form-label" for="typeNumber">{{
+              $t("content.pointsForTask")
+            }}</label>
           </div>
           <button class="btn btn-dark select-button" type="submit">
             Submit
@@ -71,6 +71,8 @@ export default {
   },
   methods: {
     async fetchData() {
+      //clear rows
+      this.rows.splice(0, this.rows.length);
       let response = await api.get(LATEX_GET);
       for (let i = 0; i < response.length; i++) {
         // loop over parsed data and push to rows
