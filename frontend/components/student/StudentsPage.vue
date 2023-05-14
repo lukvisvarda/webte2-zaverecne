@@ -3,12 +3,12 @@
     <button type="button" class="btn btn-outline-success float-right" @click="generate"> {{ $t('content.generate') }} </button>
   </div>
 <!--  <button type="button" class="btn btn-secondary" @click="seeTasks"> Prehľad zadaných úloh </button>-->
-  <problems-table></problems-table>
+  <problems-table :rows="rows"></problems-table>
 </template>
 
 <script>
 import api from "../../utils/api";
-import {GENERATE_POST} from "../../constants/edpoints";
+import {GENERATE_POST, PROBLEM_BY_USER_GET} from "../../constants/edpoints";
 import {useToast} from "vue-toastification";
 import ProblemsTable from "./ProblemsTable.vue";
 
@@ -28,6 +28,16 @@ export default {
     }
   },
 
+  data() {
+    return {
+      rows: [],
+    }
+  },
+
+  mounted() {
+    this.getProblems();
+  },
+
   methods: {
     async generate() {
       const problem = await api.post(GENERATE_POST);
@@ -36,9 +46,27 @@ export default {
         return;
       }
       this.toastSuccess("Úloha bola vygenerovaná");
+      await this.getProblems();
       //if there are no tasks to generate, return
 
     },
+
+    async getProblems() {
+      this.rows = [];
+      const problems = await api.get(PROBLEM_BY_USER_GET(this.$store.getters.getUser.id))
+      console.log(JSON.stringify(problems));
+      for(let i = 0; i < problems.length; i++){
+        this.rows.push({
+          id: problems[i].problem.id,
+          name_problem: problems[i].problem.name,
+          task: problems[i].problem.task,
+          submitted: problems[i].submitted !== 0 ? "Odovzdané" : "Neodovzdané",
+          max_points: problems[i].maxPoints,
+          points:problems[i].points,
+        })
+      }
+    },
+
     seeTasks() {
       console.log("seeTasks")
     }
