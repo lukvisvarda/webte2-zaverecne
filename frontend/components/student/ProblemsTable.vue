@@ -67,26 +67,6 @@ export default {
     }
   },
 
-  // mounted() {
-  //   this.getProblems();
-  // },
-  //
-  // methods: {
-  //   async getProblems() {
-  //     const problems = await api.get(PROBLEM_BY_USER_GET(this.$store.getters.getUser.id))
-  //     console.log(JSON.stringify(problems));
-  //     for(let i = 0; i < problems.length; i++){
-  //       this.rows.push({
-  //         id: problems[i].problem.id,
-  //         name_problem: problems[i].problem.name,
-  //         task: problems[i].problem.task,
-  //         submitted: problems[i].submitted !== 0 ? "Odovzdané" : "Neodovzdané",
-  //         max_points: problems[i].maxPoints,
-  //         points:problems[i].points,
-  //       })
-  //     }
-  //   }
-  // }
 }
 </script>
 
