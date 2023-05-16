@@ -45,7 +45,10 @@ const routes = [
     path: "/students/problem/:id", component: SingleProblem, meta: {requiresAuth: true, requiresTeacher: false}
   },
   {
-    path: '/navod', component: Tutorial, meta: { requiresAuth: true }
+    path: '/navod', component: Tutorial, meta: {requiresAuth: true}
+  },
+  {
+    path: "/students/problem/:id", component:SingleProblem, meta: { requiresAuth: true, requiresTeacher: false }
   }
 ];
 

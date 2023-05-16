@@ -1,15 +1,19 @@
 <template>
-  <div class="row">
-    <div class="col">
+  <div class="container">
+    <div class="row">
+    <div class="col-12 col-md-6">
       <h1>{{ this.problem.name }}</h1>
       <Task v-if="this.problem.task" :zadanie="this.problem.task"></Task>
       <img :src="this.problem.image" class="img-fluid" alt="task image">
     </div>
-    <div class="col">
+    <div class="col-12 col-md-6 mt-5">
       <MathEditor></MathEditor>
     </div>
 
   </div>
+  </div>
+
+
 </template>
 
 <script>

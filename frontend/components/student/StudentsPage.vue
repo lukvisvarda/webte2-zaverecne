@@ -2,7 +2,6 @@
   <div class="d-flex justify-content-start mt-4">
     <button type="button" class="btn btn-outline-success float-right" @click="generate"> {{ $t('content.generate') }} </button>
   </div>
-<!--  <button type="button" class="btn btn-secondary" @click="seeTasks"> Prehľad zadaných úloh </button>-->
   <problems-table></problems-table>
 </template>
 
@@ -39,11 +38,8 @@ export default {
       //if there are no tasks to generate, return
 
     },
-    seeTasks() {
-      console.log("seeTasks")
-    }
   },
-};
+}
 
 
 

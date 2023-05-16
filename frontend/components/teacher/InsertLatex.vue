@@ -4,28 +4,32 @@
       <VueSpinnerHourglass :size="100" color="##212529" />
     </div>
     <div v-else>
-      <AssignThesis
-        :options="options"
-        :initial-selected-options="selectedOptions"
-      />
-      <div class="select">
-        <form @submit.prevent="submitForm">
-          <div class="mb-3">
-            <label for="formFileMultiple" class="form-label"
-              >{{ $t('content.insertLaTex') }}:</label
-            >
-            <input class="form-control" type="file" id="latex-file" multiple />
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex">
+          <AssignThesis
+          :options="options"
+          :initial-selected-options="selectedOptions"
+        />
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="select">
+            <form @submit.prevent="submitForm">
+              <div class="mb-3">
+                <label for="formFileMultiple" class="form-label"
+                >{{ $t('content.insertLaTex') }}:</label
+                >
+                <input class="form-control" type="file" id="latex-file" multiple />
+              </div>
+              <div class="form-outline">
+                <label class="form-label" for="typeNumber"> {{ $t('content.pointsForTask') }} </label>
+                <input type="number" id="typeNumber" class="form-control" min="0" />
+              </div>
+              <button class="btn btn-dark select-button" type="submit">
+                Submit
+              </button>
+            </form>
           </div>
-          <div class="form-outline">
-            <input type="number" id="typeNumber" class="form-control" min="0" />
-            <label class="form-label" for="typeNumber"
-              >{{ $t('content.pointsForTask') }}</label
-            >
-          </div>
-          <button class="btn btn-dark select-button" type="submit">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   </div>

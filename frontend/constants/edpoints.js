@@ -15,9 +15,11 @@ export const STUDENT_GET = 'api/user/student'
 
 export const IMAGE_POST = 'api/teacher/upload'
 
+
 export const CSV_POST = 'api/user/csv'
 
 export const TUTORIAL_GET_PUT = 'api/tutorial'
+
 
 export const PROBLEM_BY_USER_GET = function (id) {
   return `api/user/${id}/problems`

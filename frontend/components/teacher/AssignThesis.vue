@@ -1,5 +1,6 @@
 <template>
   <div class="select">
+    <label class="mb-2">Vyber príklady na generovanie</label>
     <VueMultiselect
       v-model="selectedOptions"
       :options="options"

@@ -9,8 +9,8 @@ use App\Models\User;
 use App\Models\UserProblem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Storage;
+
 
 use NunoMaduro\Collision\Writer;
 
@@ -87,7 +87,6 @@ class UserController{
     $users = User::where('role', RolesEnum::STUDENT)->get();
     return response()->json($users);
   }
-
 
   public function uploadImages(Request $request)
   {

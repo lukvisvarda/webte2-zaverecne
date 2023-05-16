@@ -47,7 +47,7 @@
             </router-link>
           </li>
         </ul>
-        <form class="d-flex">
+        <form class="mb-2">
           <button
             class="btn btn-outline-success"
             type="submit"

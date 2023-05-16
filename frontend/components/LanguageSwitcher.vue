@@ -1,7 +1,6 @@
 <template>
-  <div class="language-switcher">
-
-    <select @change="switchLanguage($event)" class="form-select form-select my-3" aria-label=".form-select-sm example">
+  <div class="language-switcher ms-4">
+    <select @change="switchLanguage($event)" class="form-select" aria-label=".form-select-sm example">
       <option value="sk">sk</option>
       <option value="en">en</option>
     </select>
