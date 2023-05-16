@@ -14,16 +14,18 @@ Vue sa nachadza v priečinku `frontend`.
 - Nie je implementované pridávanie zadaní podľa času.
 
 ## TODOS:
-
-- investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.)
+- latex input nefunguje, ked nie je focusnuty(lukas simon)
+- obrazok sa nezobrazuje pri rieseni ulohy (Janci)
+- investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.) - patres
 - investigate: ako dostat tuto haluz na server
-- fe - pohrat sa s responzivitou (ucitel done)
-- fe - z navbaru dat prec buttony podla danej roly ktora je prihlasena (teacher -> ucitel), (student -> student)
+- vyber z pridelenych suborov, z ktorych chce student generovat priklady
 - be + fe - pod tagy pridat pre kazdy tag (priradenu ulohu) aj cas odomknutia pre danu ulohu v componente `AssignThesis`
-- be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
-- be - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)
-- v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
 - docker composer nefunguje(to spravi IBAN)
+- [x] v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
+- [x] be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
+- [x] be - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)
+- [x] fe - pohrat sa s responzivitou (ucitel done)
+- [x] fe - z navbaru dat prec buttony podla danej roly ktora je prihlasena (teacher -> ucitel), (student -> student)
 - [x] investigate: po zmenseni okna sa do\*ebe navbar, vyriesit
 - [x] be + fe - pridat moznost ucitela skontrolovat pracu studentov, kto ma kolko bodov, ktore ulohy riesil apod
 - [x] be - authguard na backende(aby non logged user nevedel robit requesty)

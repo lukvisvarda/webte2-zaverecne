@@ -26,7 +26,7 @@ export default {
       config: {
         virtualKeyboardMode: 'onfocus'
       },
-      value: 'f(x) = ',
+      value: '',
       rendered: ''
     }
   },
