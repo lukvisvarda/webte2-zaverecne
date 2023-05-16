@@ -15,12 +15,12 @@ Vue sa nachadza v priečinku `frontend`.
 
 ## TODOS:
 - latex input nefunguje, ked nie je focusnuty(lukas simon)
-- obrazok sa nezobrazuje pri rieseni ulohy (Janci)
 - investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.) - patres
 - investigate: ako dostat tuto haluz na server
 - vyber z pridelenych suborov, z ktorych chce student generovat priklady
 - be + fe - pod tagy pridat pre kazdy tag (priradenu ulohu) aj cas odomknutia pre danu ulohu v componente `AssignThesis`
 - docker composer nefunguje(to spravi IBAN)
+- [x] obrazok sa nezobrazuje pri rieseni ulohy (Janci)
 - [x] v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
 - [x] be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
 - [x] be - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)

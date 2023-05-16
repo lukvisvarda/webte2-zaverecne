@@ -12,7 +12,8 @@
     "db:drop": "php artisan migrate:reset",
     "db:seed": "php artisan db:seed",
     "composer:install": "composer install",
-    "setup": "npm run db:migrate && npm run db:seed"
+    "setup": "npm run db:migrate && npm run db:seed && npm run storage:link",
+    "storage:link": "php artisan storage:link"
   },
   "devDependencies": {
     "axios": "^1.1.2",
