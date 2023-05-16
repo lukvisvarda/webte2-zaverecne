@@ -49,8 +49,6 @@ export default {
       //if there are no tasks to generate, return
 
     },
-<<<<<<< HEAD
-=======
 
     async getProblems() {
       this.rows = [];
@@ -67,11 +65,6 @@ export default {
         })
       }
     },
-
-    seeTasks() {
-      console.log("seeTasks")
-    }
->>>>>>> main
   },
 }
 
