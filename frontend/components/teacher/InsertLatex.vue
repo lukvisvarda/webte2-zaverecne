@@ -75,6 +75,8 @@ export default {
   },
   methods: {
     async fetchData() {
+      //clear rows
+      this.rows.splice(0, this.rows.length);
       let response = await api.get(LATEX_GET);
       for (let i = 0; i < response.length; i++) {
         // loop over parsed data and push to rows
