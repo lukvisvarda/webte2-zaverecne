@@ -20,6 +20,7 @@ class EquationController extends Controller
     $neviem = $equationValue;
     $solution = $problem->solution;
 
+
     // Perform equation value comparison logic here and return the result
     // You can update this code to match your specific comparison logic
     error_log('Equation Value: ' . $equationValue); // Log equation value to console

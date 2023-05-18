@@ -68,3 +68,4 @@ Route::middleware('jwt.auth')->get('/problems/{id}', [UserProblemController::cla
 Route::middleware('jwt.auth')->post('/teacher/upload', [UserController::class, 'uploadImages']);
 
 Route::post('/check-equation', [EquationController::class, 'checkEquation']);
+
