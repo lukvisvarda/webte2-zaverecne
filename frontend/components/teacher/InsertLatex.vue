@@ -4,14 +4,8 @@
       <VueSpinnerHourglass :size="100" color="##212529" />
     </div>
     <div v-else>
-      <div class="row">
-        <div class="col-12 col-md-6 d-flex">
-          <AssignThesis
-          :options="options"
-          :initial-selected-options="selectedOptions"
-        />
-        </div>
-        <div class="col-12 col-md-6">
+      <div class="row d-flex align-items-center">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
           <div class="select">
             <form @submit.prevent="submitForm">
               <div class="mb-3">
@@ -24,11 +18,18 @@
                 <label class="form-label" for="typeNumber"> {{ $t('content.pointsForTask') }} </label>
                 <input type="number" id="typeNumber" class="form-control" min="0" />
               </div>
+              <VueDatePicker v-model="date" class="mt-2" range></VueDatePicker>
               <button class="btn btn-dark select-button" type="submit">
                 Submit
               </button>
             </form>
           </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+          <AssignThesis
+            :options="options"
+            :initial-selected-options="selectedOptions"
+          />
         </div>
       </div>
     </div>
@@ -43,6 +44,8 @@ import TeacherTable from "./TeacherTable.vue";
 import AssignThesis from "./AssignThesis.vue";
 import { useToast } from "vue-toastification";
 import { VueSpinnerHourglass } from "vue3-spinners";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: "InsertLatex",
@@ -50,6 +53,7 @@ export default {
     TeacherTable,
     AssignThesis,
     VueSpinnerHourglass,
+    VueDatePicker,
   },
 
   setup() {
@@ -67,11 +71,15 @@ export default {
       rows: [],
       options: [],
       selectedOptions: [],
+      date: null,
     };
   },
 
   mounted() {
     this.fetchData();
+    // const startDate = new Date();
+    // const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+    // this.date = [startDate, endDate];
   },
   methods: {
     async fetchData() {
@@ -125,6 +133,8 @@ export default {
       formData.append("file", file);
       formData.append("name", "test");
       formData.append("points", points);
+      formData.append("dateFrom", this.date[0] ? this.date[0] : null);
+      formData.append("dateTo", this.date[1] ? this.date[1] : null);
 
       api
         .post(LATEX_POST, formData, {
@@ -135,6 +145,8 @@ export default {
         .then((response) => {
           console.log("Success:", response);
           this.fetchData();
+          this.date = null;
+          this.dateError = false;
         })
         .catch((error) => {
           // Handle error
@@ -156,16 +168,10 @@ export default {
 }
 
 .select {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 400px;
-  flex-direction: column;
-  margin: 0 auto;
+  width: 25rem;
 }
 
 .select-button {
   width: 100%;
-  margin-bottom: 2rem;
 }
 </style>

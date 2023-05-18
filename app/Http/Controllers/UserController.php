@@ -25,13 +25,8 @@ class UserController{
   public function addRandomProblemFromSelectedLatexFiles(Request $request){
     $user =  Auth::user();
 
-    //get selected files from body
-    $selectedFiles = $request->all()['problems'];
-
-    // var_dump($selectedFiles);
-
     //ak nie su ziadne files na vyber tak vratim prazdny json
-    if(count($selectedFiles) == 0){
+    if(count(selectedFile::all()) == 0){
       return response()->json();
     }
 

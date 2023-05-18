@@ -4,9 +4,11 @@
       <VueSpinnerHourglass :size="100" color="#0d6efd"/>
     </div>
     <div v-else>
+      <h1 class="center">{{ $t("tutorial.header") }}</h1>
       <div>
         {{ text }}
       </div>
+      <button class="btn btn-primary" @click="generatePDF">{{ $t("tutorial.generatePDF") }}</button>
       <div v-if="loggedInUser.role === 'teacher'">
         <button class="btn btn-primary" @click="edit = !edit">Edit</button>
 
@@ -26,7 +28,8 @@ import {useStore} from "vuex";
 import api from "../../utils/api";
 import { TUTORIAL_GET_PUT } from "../../constants/edpoints";
 import { VueSpinnerHourglass } from 'vue3-spinners'
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 export default {
   name: "Tutorial",
@@ -38,7 +41,7 @@ export default {
   setup(){
     const store = useStore();
     const loggedInUser = store.getters.getUser;
-
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
     return {
       loggedInUser,
     }
@@ -52,6 +55,23 @@ export default {
     async fetchData(){
        this.text = (await api.get(TUTORIAL_GET_PUT)).text;
        this.isLoading = false;
+    },
+    generatePDF() {
+      const docDefinition = {
+        content: [
+          { text: "Návod", style: 'header' }, // Header element
+          this.text
+        ],
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+            margin: [0, 0, 0, 10], // Adjust margin as needed
+          },
+        },
+      };
+
+      pdfMake.createPdf(docDefinition).download('navod.pdf');
     },
     async save() {
       await api.put(TUTORIAL_GET_PUT, {text: this.text});

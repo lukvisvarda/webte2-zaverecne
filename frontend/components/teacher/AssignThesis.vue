@@ -112,16 +112,7 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <style>
-.select {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 400px;
-  flex-direction: column;
-  margin: 0 auto;
-}
 .select-button {
   width: 100%;
-  margin-bottom: 2rem;
 }
 </style>

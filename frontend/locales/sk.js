@@ -23,6 +23,15 @@ export default {
     insertLaTex: 'Vlož LaTex súbor',
     pointsForTask: 'Počet bodov na zadanie',
     showStudent: 'Zobraziť študenta',
+  },
+
+  singleProblem:{
+    submit: "Odoslať",
+    missingImage: "učiteľ nepridal obrázok, aj keď ho mal pridať",
+  },
+  tutorial: {
+    generatePDF: 'Generovať PDF',
+    header: "Návod"
   }
 
 }
