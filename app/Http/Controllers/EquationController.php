@@ -30,6 +30,6 @@ class EquationController extends Controller
          ->where('id',$id)
          ->update(['points' => $maxPoints]);
     }
-
+    return response()->json(["isEquationCorrect" => $isEquationCorrect, "solution" => $solution]);
   }
 }

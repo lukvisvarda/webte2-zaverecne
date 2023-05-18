@@ -9,9 +9,13 @@
       <div class="col-12 col-md-6 mt-5">
         <MathEditor ref="mathEditor"></MathEditor>
 
-        <router-link :to="{ path: '/student' }" class="btn btn-primary btn-md px-5">
+<!--        <router-link :to="{ path: '/student' }" class="btn btn-primary btn-md px-5">-->
+<!--          {{ $t("singleProblem.submit") }}-->
+<!--        </router-link>        -->
+         <button class="btn btn-primary btn-md px-5" v-on:click="checkEquationValue">
           {{ $t("singleProblem.submit") }}
-        </router-link>        <div class="equation-value" v-html="renderedEquation"></div>
+        </button>
+        <div class="equation-value" v-html="renderedEquation"></div>
       </div>
     </div>
   </div>
@@ -23,9 +27,18 @@ import { PROBLEM_BY_ID_GET } from "../../constants/edpoints";
 import api from "../../utils/api";
 import Task from "../latex/Task.vue";
 import MathEditor from "../editor/MathEditor.vue";
+import {useRouter} from "vue-router";
+import router from "../../router";
 
 export default {
   components: { MathEditor, Task },
+
+  setup(){
+    const router = useRouter();
+    return {
+      router
+    }
+  },
 
   data() {
     return {
@@ -49,11 +62,13 @@ export default {
 
       //musi to tu byt latex ma na zlomky dfrac, vue pouziva frac
       const equationValue = "$\n" + "        " + mathEditorComponent.value.replace(/\\frac/g, '\\dfrac') + "\n    $";
-      const response = await api.post('/api/check-equation', {
+      const data = {
         id: this.$route.params.id,
         equationValue: equationValue
-      });
-      console.log(equationValue)
+      }
+      console.log("data",data);
+      const response = await api.post('/api/check-equation', data);
+      await this.router.push({path: '/student'});
 
     }
   }

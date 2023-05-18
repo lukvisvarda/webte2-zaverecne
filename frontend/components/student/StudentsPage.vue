@@ -139,7 +139,7 @@ export default {
       console.log(JSON.stringify(problems));
       for(let i = 0; i < problems.length; i++){
         this.rows.push({
-          id: problems[i].problem.id,
+          id: problems[i].id,
           name_problem: problems[i].problem.name,
           task: problems[i].problem.task,
           submitted: problems[i].submitted !== 0 ? "Odovzdané" : "Neodovzdané",

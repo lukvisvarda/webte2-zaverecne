@@ -9,7 +9,9 @@ class UserProblemController{
   public function getProblemsByStudentId($id){
     $userProblems = UserProblem::findByUser($id);
     $actualProblems = $userProblems->map(function($problem){
-      return ["problem" => $problem->problem,
+      return [
+        "id" => $problem->id,
+        "problem" => $problem->problem,
           "solved"=> $problem->solved,
           "maxPoints"=>$problem->max_points,
         "points" => $problem->points,
