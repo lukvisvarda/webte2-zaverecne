@@ -3,7 +3,8 @@ export default {
     login: 'login',
     logout: 'logout',
     register: 'register',
-    overviewTeacher: 'overview-teacher'
+    overviewTeacher: 'overview teacher',
+    tutorial: 'tutorial',
   },
 
   auth: {
@@ -32,6 +33,11 @@ export default {
   tutorial: {
     generatePDF: 'Generate PDF',
     header: "Tutorial"
+  },
+
+  tag: {
+    newTag: 'Add this as new tag',
+    placeholder: 'Type to search or add tag'
   }
 
 }

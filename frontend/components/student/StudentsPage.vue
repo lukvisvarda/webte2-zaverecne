@@ -1,21 +1,28 @@
 <template>
-<div class="select mt-5">
-    <label for="example-select">Vyberte príklady:</label>
-    <VueMultiselect
-      v-model="selectedOptions"
-      :options="options"
-      :multiple="true"
-      :taggable="true"
-      @tag="addTag"
-      tag-placeholder="Add this as new tag"
-      placeholder="Type to search or add tag"
-      label="name"
-      track-by="code"
-      @select="optionSelected"
-      @remove="removeTag"
-    ></VueMultiselect>
+<div class="mt-5 ">
+
+    <div class="centered">
+      <div class="select">
+
+        <label for="example-select">Vyberte príklady:</label>
+        <VueMultiselect
+          v-model="selectedOptions"
+          :options="options"
+          :multiple="true"
+          :taggable="true"
+          @tag="addTag"
+          :tag-placeholder="$t('tag.addTag')"
+          :placeholder="$t('tag.placeholder')"
+          label="name"
+          track-by="code"
+          @select="optionSelected"
+          @remove="removeTag"
+        ></VueMultiselect>
+        <button type="button" class="btn btn-outline-success" @click="generate"> {{ $t('content.generate') }} </button>
+      </div>
+    </div>
+
     <!-- <button @click="generateExamples">Generovať</button> -->
-    <button type="button" class="btn btn-outline-success" @click="generate"> {{ $t('content.generate') }} </button>
   </div>
   <problems-table :rows="rows"></problems-table>
 </template>
@@ -25,14 +32,13 @@ import api from "../../utils/api";
 import {ASSIGN_GET, GENERATE_POST, PROBLEM_BY_USER_GET} from "../../constants/edpoints";
 import {useToast} from "vue-toastification";
 import ProblemsTable from "./ProblemsTable.vue";
-import GenerateSelectVue from './GenerateSelect.vue';
 import VueMultiselect from "vue-multiselect";
 import { reactive } from "vue";
 
 
 export default {
   name: "StudentsPage",
-  components: { ProblemsTable, GenerateSelectVue, VueMultiselect },
+  components: { ProblemsTable, VueMultiselect },
 
   setup() {
     const toast = useToast();
@@ -100,7 +106,7 @@ export default {
         problems: this.selectedOptions,
       });
       if(problem.message){
-        this.toastErr("Nemáte žiadne úlohy na vygenerovanie");
+        this.toastErr(problem.message);
         return;
       }
       this.toastSuccess("Úloha bola vygenerovaná");
@@ -149,26 +155,13 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .student-wrapper {
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
 
-  .our-student-button {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    color: #000;
-    font-size: 16px;
-    cursor: pointer;
-    min-width: 300px;
-    min-height: 300px;
-    background: red;
-  }
 </style>

@@ -16,6 +16,14 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link
+              to="/navod"
+              class="nav-link"
+            >
+              {{ $t('navbar.tutorial') }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
               class="nav-link"
               to="/login"
               v-if="!this.isLoggedInComputed"
@@ -32,6 +40,7 @@
               {{ $t('auth.teacher') }}
             </router-link>
           </li>
+
           <li class="nav-item">
             <router-link
               v-if="store.getters.getUser.role === 'student'"
