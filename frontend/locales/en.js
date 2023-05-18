@@ -23,6 +23,11 @@ export default {
     insertLaTex: 'Upload LaTex file',
     pointsForTask: 'Score for this task',
     showStudent: 'View student',
+  },
+
+  singleProblem:{
+    submit: "Submit",
+    missingImage: "missing image",
   }
 
 }

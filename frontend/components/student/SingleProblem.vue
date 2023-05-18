@@ -4,11 +4,11 @@
       <div class="col-12 col-md-6">
         <h1>{{ this.problem.name }}</h1>
         <Task v-if="this.problem.task" :zadanie="this.problem.task"></Task>
-        <img :src="this.problem.image" class="img-fluid" alt="task image">
+        <img :src="this.problem.image" class="img-fluid" :alt="$t('singleProblem.missingImage')">
       </div>
       <div class="col-12 col-md-6 mt-5">
         <MathEditor ref="mathEditor"></MathEditor>
-        <button @click="checkEquationValue" class="btn btn-primary btn-md px-5">Submit</button>
+        <button @click="checkEquationValue" class="btn btn-primary btn-md px-5">{{ $t("singleProblem.submit") }}</button>
         <div class="equation-value" v-html="renderedEquation"></div>
       </div>
     </div>
@@ -51,6 +51,7 @@ export default {
         id: this.$route.params.id,
         equationValue: equationValue
       });
+      console.log(equationValue)
 
     }
   }
