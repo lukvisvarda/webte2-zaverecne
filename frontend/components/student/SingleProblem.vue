@@ -8,7 +8,7 @@
       </div>
       <div class="col-12 col-md-6 mt-5">
         <MathEditor ref="mathEditor"></MathEditor>
-        <button @click="checkEquationValue">Check Equation Value</button>
+        <button @click="checkEquationValue" class="btn btn-primary btn-md px-5">Submit</button>
         <div class="equation-value" v-html="renderedEquation"></div>
       </div>
     </div>
@@ -30,7 +30,6 @@ export default {
       problem: {},
       renderedEquation: '',
 
-
     };
   },
 
@@ -41,39 +40,22 @@ export default {
   methods: {
     async getProblem() {
       this.problem = await api.get(PROBLEM_BY_ID_GET(this.$route.params.id));
-      const response = await api.get(PROBLEM_BY_ID_GET(this.$route.params.id));
-
     },
 
     async checkEquationValue() {
       const mathEditorComponent = this.$refs.mathEditor;
+
       //musi to tu byt latex ma na zlomky dfrac, vue pouziva frac
       const equationValue = "$\n" + "        " + mathEditorComponent.value.replace(/\\frac/g, '\\dfrac') + "\n    $";
-
-      console.log(equationValue);
       const response = await api.post('/api/check-equation', {
         id: this.$route.params.id,
         equationValue: equationValue
       });
 
-      console.log(response);
-      console.log(response.solution);
-
-      this.renderedEquation = response.solution;
-
-      // Check if the mathEditor value is the same as renderedEquation
-      if (equationValue === this.renderedEquation) {
-        console.log('Yes');
-      } else {
-        console.log('No');
-      }
     }
-
-
   }
 };
 </script>
 
 <style scoped>
-
 </style>
