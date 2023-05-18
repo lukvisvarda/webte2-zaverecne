@@ -26,6 +26,7 @@
     "vuex": "^4.1.0"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^5.1.1",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "concurrently": "^8.0.1",

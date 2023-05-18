@@ -7,6 +7,7 @@ use App\Models\Problem;
 use App\Models\selectedFile;
 use App\Models\User;
 use App\Models\UserProblem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,9 +26,8 @@ class UserController{
   public function addRandomProblemFromSelectedLatexFiles(){
     $user =  Auth::user();
 
-    //ak nie su ziadne files na vyber tak vratim prazdny json
     if(count(selectedFile::all()) == 0){
-      return response()->json();
+      return response()->json(["message"=>"Nemáte žiadne úlohy na vygenerovanie"]);
     }
 
     $selectedFiles = selectedFile::all()[0]['selectedFiles'];
@@ -37,7 +37,19 @@ class UserController{
 
     foreach ($arr as $fileId) {
       $latexFile = LatexFile::findByName($fileId);
-      $actualLatexFiles[] = $latexFile; // tu su aj ti ebody
+      if ($latexFile->available_from != null && $latexFile->available_to != null) {
+        if ($latexFile->available_from < Carbon::now() && $latexFile->available_to > Carbon::now()) {
+          $actualLatexFiles[] = $latexFile;  // tu su aj ti ebody
+        }
+      } else if ($latexFile->available_from != null && $latexFile->available_to == null) {
+        if ($latexFile->available_from < Carbon::now()) {
+          $actualLatexFiles[] = $latexFile;  // tu su aj ti ebody
+        }
+      }
+    }
+
+    if (sizeof($actualLatexFiles) == 0) {
+      return response()->json(["message"=>"Nemáte žiadne úlohy na vygenerovanie"]);
     }
 
     $allProblems = array();
