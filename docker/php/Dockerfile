@@ -114,7 +114,7 @@ RUN npm install
 
 # Copy the rest of your Laravel application
 COPY . .
-COPY .env.example .env
+COPY --overwrite .env.example .env
 RUN chown -R 33:33 "/root/.npm"
 RUN chown -R www-data:www-data /usr/src/app/public
 
