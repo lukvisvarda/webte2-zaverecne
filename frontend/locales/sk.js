@@ -35,6 +35,19 @@ export default {
   assignThesis: {
     choose: "Vyber príklady na generovanie",
     submit: "Potvrdiť"
+  },
+
+  problemstable: {
+    file_name: "Názov súboru",
+    Task: "Úloha",
+    Submit: "Odovzdané",
+    Max: "Maximálny počet bodov",
+    pts: "Počet bodov",
+    act: "Akcia"
+  },
+
+  teachtab: {
+    succ: ""
   }
 }
 

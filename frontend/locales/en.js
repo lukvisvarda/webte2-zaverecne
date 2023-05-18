@@ -34,5 +34,14 @@ export default {
   assignThesis: {
     choose: "Choose math problems to solve",
     submit: "Submit"
+  },
+
+  problemstable: {
+    File_name: "File Name",
+    Task: "Task",
+    Submit: "Submitted",
+    Max: "Max points",
+    pts: "Points",
+    act: "Action"
   }
 }

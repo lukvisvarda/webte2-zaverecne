@@ -8,8 +8,10 @@
       </div>
       <div class="col-12 col-md-6 mt-5">
         <MathEditor ref="mathEditor"></MathEditor>
-        <button @click="checkEquationValue" class="btn btn-primary btn-md px-5">{{ $t("singleProblem.submit") }}</button>
-        <div class="equation-value" v-html="renderedEquation"></div>
+
+        <router-link :to="{ path: '/student' }" class="btn btn-primary btn-md px-5">
+          {{ $t("singleProblem.submit") }}
+        </router-link>        <div class="equation-value" v-html="renderedEquation"></div>
       </div>
     </div>
   </div>

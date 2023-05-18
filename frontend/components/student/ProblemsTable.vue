@@ -40,27 +40,27 @@ export default {
           field: 'id',
         },
         {
-          label: 'Názov príkladu',
+          label: this.$t("problemstable.file_name"),
           field: 'name_problem',
         },
         {
-          label: 'Zadanie',
+          label: this.$t("problemstable.Task"),
           field: 'task',
         },
         {
-          label: 'Odovzdané',
+          label: this.$t("problemstable.Submit"),
           field: 'submitted',
         },
         {
-          label: 'Maximálny počet bodov',
+          label: this.$t("problemstable.Max"),
           field: 'max_points',
         },
         {
-          label: 'Počet bodov',
+          label: this.$t("problemstable.pts"),
           field: 'points',
         },
         {
-          label: 'Akcia',
+          label: this.$t("problemstable.act"),
           field: 'action',
         },
       ],
