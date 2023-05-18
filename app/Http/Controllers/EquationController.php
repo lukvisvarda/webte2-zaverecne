@@ -17,6 +17,7 @@ class EquationController extends Controller
 
     $problem = Problem::findOrFail($id);
 
+
     $neviem = $equationValue;
     $solution = $problem->solution;
 
