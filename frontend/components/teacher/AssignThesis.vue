@@ -1,6 +1,6 @@
 <template>
   <div class="select">
-    <label class="mb-2">Vyber príklady na generovanie</label>
+    <label class="mb-2">{{ $t("assignThesis.choose") }}</label>
     <VueMultiselect
       v-model="selectedOptions"
       :options="options"
@@ -15,7 +15,7 @@
       @remove="removeTag"
     />
     <button class="btn btn-dark select-button" @click="submitSelection()">
-      Potvrdiť
+      {{ $t("assignThesis.submit") }}
     </button>
   </div>
 </template>

@@ -25,7 +25,7 @@
                 <input type="number" id="typeNumber" class="form-control" min="0" />
               </div>
               <button class="btn btn-dark select-button" type="submit">
-                Submit
+                {{ $t("assignThesis.submit") }}
               </button>
             </form>
           </div>

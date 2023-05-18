@@ -28,6 +28,11 @@ export default {
   singleProblem:{
     submit: "Submit",
     missingImage: "missing image",
-  }
+    msg: "The task has been submitted"
+  },
 
+  assignThesis: {
+    choose: "Choose math problems to solve",
+    submit: "Submit"
+  }
 }

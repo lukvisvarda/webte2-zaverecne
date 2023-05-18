@@ -28,6 +28,13 @@ export default {
   singleProblem:{
     submit: "Odoslať",
     missingImage: "učiteľ nepridal obrázok, aj keď ho mal pridať",
-  }
+    msg: "Úloha bola odovzdaná"
 
+  },
+
+  assignThesis: {
+    choose: "Vyber príklady na generovanie",
+    submit: "Potvrdiť"
+  }
 }
+
