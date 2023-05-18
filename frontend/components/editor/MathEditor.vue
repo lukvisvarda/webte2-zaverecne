@@ -1,7 +1,9 @@
 <template>
   <div>
-    <math-field :config="config" :value="value" @input="handleChange"></math-field>
-    <p v-html="rendered"></p>
+    <math-field  v-on:change="handleChange" :value="value"></math-field>
+<!--    <math-field></math-field>-->
+<!--    <p v-html="rendered"></p>-->
+<!--    <p>{{ this.value }}</p>-->
   </div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
       config: {
         virtualKeyboardMode: 'onfocus'
       },
-      value: 'f(x) = ',
+      value: '',
       rendered: ''
     }
   },
@@ -44,5 +46,16 @@ export default {
       this.onValueChange(newLatex);
     }
   }
+
+  // computed:{
+  //   rendered() {
+  //     try {
+  //       return convertLatexToMarkup(this.value);
+  //     } catch (error) {
+  //       console.error(error);
+  //       return this.value;
+  //     }
+  //   }
+  // }
 }
 </script>
