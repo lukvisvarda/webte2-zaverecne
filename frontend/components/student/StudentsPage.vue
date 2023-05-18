@@ -1,22 +1,77 @@
 <template>
-  <div class="d-flex justify-content-start mt-4">
-    <button type="button" class="btn btn-outline-success float-right" @click="generate"> {{ $t('content.generate') }} </button>
+<div class="mt-5 ">
+
+    <div class="centered">
+      <div class="select">
+
+        <label for="example-select">Vyberte príklady:</label>
+        <VueMultiselect
+          v-model="selectedOptions"
+          :options="options"
+          :multiple="true"
+          :taggable="true"
+          @tag="addTag"
+          :tag-placeholder="$t('tag.addTag')"
+          :placeholder="$t('tag.placeholder')"
+          label="name"
+          track-by="code"
+          @select="optionSelected"
+          @remove="removeTag"
+        ></VueMultiselect>
+        <button type="button" class="btn btn-outline-success" @click="generate"> {{ $t('content.generate') }} </button>
+      </div>
+    </div>
+
+    <!-- <button @click="generateExamples">Generovať</button> -->
   </div>
   <problems-table :rows="rows"></problems-table>
 </template>
 
 <script>
 import api from "../../utils/api";
-import {GENERATE_POST, PROBLEM_BY_USER_GET} from "../../constants/edpoints";
+import {ASSIGN_GET, GENERATE_POST, PROBLEM_BY_USER_GET} from "../../constants/edpoints";
 import {useToast} from "vue-toastification";
 import ProblemsTable from "./ProblemsTable.vue";
+import VueMultiselect from "vue-multiselect";
+import { reactive } from "vue";
+
 
 export default {
   name: "StudentsPage",
-  components: { ProblemsTable },
+  components: { ProblemsTable, VueMultiselect },
 
   setup() {
     const toast = useToast();
+    let selectedOptions = reactive([]);
+
+    const addTag = (newTag) => {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.options.push(tag);
+      selectedOptions.push(tag);
+      // props.handleChange(selectedOptions);
+    };
+
+    const optionSelected = (selectedOption) => {
+      console.log(selectedOption);
+      if (selectedOption.$isTag) {
+        addTag(selectedOption.label);
+      } else {
+        selectedOptions.push(selectedOption);
+      }
+    };
+
+    const removeTag = (tag) => {
+      console.log(tag);
+      // const index = selectedOptions.indexOf(tag)
+      const found = selectedOptions.find((option) => option.name === tag.name);
+      const index = selectedOptions.indexOf(found);
+      if (index !== -1) {
+        selectedOptions.splice(index, 1);
+      }
+  }
     return {
       toastErr: function (msg) {
         toast.error(msg)
@@ -24,30 +79,58 @@ export default {
       toastSuccess: function (msg) {
         toast.success(msg)
       },
+      selectedOptions,
+      addTag,
+      optionSelected,
+      removeTag,
     }
   },
 
   data() {
     return {
       rows: [],
+      options: [],
+      selectedOptions: [],
     }
   },
 
   mounted() {
     this.getProblems();
+    this.getAssignedThesis();
   },
 
   methods: {
     async generate() {
-      const problem = await api.post(GENERATE_POST);
+      console.log(this.selectedOptions);
+      const problem = await api.post(GENERATE_POST, {
+        problems: this.selectedOptions,
+      });
       if(problem.message){
-        this.toastErr("Nemáte žiadne úlohy na vygenerovanie");
+        this.toastErr(problem.message);
         return;
       }
       this.toastSuccess("Úloha bola vygenerovaná");
       await this.getProblems();
-      //if there are no tasks to generate, return
+      // if there are no tasks to generate, return
 
+    },
+
+    // getSelectedOptions(selectedOptions) {
+    //   this.selectedOptions = selectedOptions;
+    //   console.log(selectedOptions, "AAAAaaaaaasssfsef");
+    // },
+
+    async getAssignedThesis() {
+      const response = await api.get(ASSIGN_GET);
+      if (response.selectedFiles) {
+        for (let i = 0; i < response.selectedFiles.length; i++) {
+          // this.selectedOptions.push(response.selectedFiles[i]);
+          this.options.push({
+          name: response.selectedFiles[i],
+          code: response.selectedFiles[i],
+        });
+        }
+      }
     },
 
     async getProblems() {
@@ -73,27 +156,12 @@ export default {
 </script>
 
 <style scoped>
-  .btn {
-    margin-left: 50px;
-  }
-  .student-wrapper {
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .our-student-button {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    color: #000;
-    font-size: 16px;
-    cursor: pointer;
-    min-width: 300px;
-    min-height: 300px;
-    background: red;
-  }
+
 </style>

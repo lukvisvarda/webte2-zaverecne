@@ -3,7 +3,8 @@ export default {
     login: 'prihlásiť',
     logout: 'odhlásiť',
     register: 'zaregistrovať',
-    overviewTeacher: 'prehľad učiteľ'
+    overviewTeacher: 'prehľad učiteľ',
+    tutorial: 'návod',
   },
 
   auth: {
@@ -50,4 +51,3 @@ export default {
     succ: ""
   }
 }
-

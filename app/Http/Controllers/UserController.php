@@ -7,6 +7,7 @@ use App\Models\Problem;
 use App\Models\selectedFile;
 use App\Models\User;
 use App\Models\UserProblem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,22 +23,32 @@ class UserController{
     return response()->json($user);
   }
 
-  public function addRandomProblemFromSelectedLatexFiles(){
+  public function addRandomProblemFromSelectedLatexFiles(Request $request){
     $user =  Auth::user();
-
+    $selectedFiles = $request->input('problems');
     //ak nie su ziadne files na vyber tak vratim prazdny json
-    if(count(selectedFile::all()) == 0){
+    if(count($selectedFiles) == 0){
       return response()->json();
     }
-
-    $selectedFiles = selectedFile::all()[0]['selectedFiles'];
 
     $arr = $selectedFiles ;
     $actualLatexFiles = array();
 
     foreach ($arr as $fileId) {
       $latexFile = LatexFile::findByName($fileId);
-      $actualLatexFiles[] = $latexFile; // tu su aj ti ebody
+      if ($latexFile->available_from != null && $latexFile->available_to != null) {
+        if ($latexFile->available_from < Carbon::now() && $latexFile->available_to > Carbon::now()) {
+          $actualLatexFiles[] = $latexFile;  // tu su aj ti ebody
+        }
+      } else if ($latexFile->available_from != null && $latexFile->available_to == null) {
+        if ($latexFile->available_from < Carbon::now()) {
+          $actualLatexFiles[] = $latexFile;  // tu su aj ti ebody
+        }
+      }
+    }
+
+    if (sizeof($actualLatexFiles) == 0) {
+      return response()->json(["message"=>"Generovanie nie je možné v tomto čase"]);
     }
 
     $allProblems = array();
@@ -48,18 +59,7 @@ class UserController{
       }
     }
 
-//    $solvedProblems = $user->assignedProblems()->where('solved', true)->pluck('id')->toArray();
-//    $assignedProblems = $user->assignedProblems()->map(function($problem){
-//      return $problem->id;
-//    });
     $assignedProblems = $user->assignedProblems()->pluck('problem_id')->toArray();
-
-//    var_dump($user->assignedProblems());
-
-    // filter out the problems that the user has already solved
-//    $unsolvedProblems = array_filter($allProblems, function ($problem) use ($solvedProblems) {
-//      return !in_array($problem->id, $solvedProblems);
-//    });
 
     $unsolvedProblems = array_filter($allProblems, function ($problem) use ($assignedProblems) {
       return !in_array($problem->id, $assignedProblems);

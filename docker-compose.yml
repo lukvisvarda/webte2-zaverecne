@@ -27,8 +27,24 @@
 #      - "3306:3306"
 version: "3.8"
 services:
+    db:
+        #        container_name: webte_app
+        image: mysql:8.0.20
+        restart: always
+        volumes:
+            - ./storage/db-data:/var/lib/mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: webte_zaverecne
+            MYSQL_USER: webte
+            MYSQL_PASSWORD: pass123
+        networks:
+            - app_network
     app:
         container_name: webte_app
+        restart: always
         build:
             context: .
             dockerfile: ./docker/php/Dockerfile
@@ -59,21 +75,7 @@ services:
         networks:
             - app_network
 
-    db:
-#        container_name: webte_app
-        image: mysql:8.0.20
-        restart: always
-        volumes:
-            - ./storage/db-data:/var/lib/mysql
-        ports:
-            - 3306:3306
-        environment:
-              MYSQL_ROOT_PASSWORD: root
-              MYSQL_DATABASE: webte_zaverecne
-              MYSQL_USER: webte
-              MYSQL_PASSWORD: pass123
-        networks:
-            - app_network
+
 
     redis:
 #        container_name: webte_app
