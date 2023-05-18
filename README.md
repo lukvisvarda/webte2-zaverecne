@@ -3,46 +3,12 @@
 ![Vue3](https://img.shields.io/badge/Vue-3-green)
 ![Laravel10.8](https://img.shields.io/badge/Laravel-10.8-red)
 
-Treba zabezpečiť, aby priečinky vendor, node_modules atp. boli v gitignore.
-
 ## Frontend
 
 Vue sa nachadza v priečinku `frontend`.
 
-# Davam do povedomia:
-
-- Nie je implementované pridávanie zadaní podľa času.
-
-## TODOS:
-- latex input nefunguje, ked nie je focusnuty(lukas simon)
-- be + fe - pod tagy pridat pre kazdy tag (priradenu ulohu) aj cas odomknutia pre danu ulohu v componente `AssignThesis`
-- investigate: ake su moznosti kontrolovania tych ekvivalentnych spravnych rieseni (skusal som robehat tie srandy co tam oni navrhovali, ale vyzera to ako pain, mozno by bolo lepsie pouzit nejaky pythonovsky validator a ten potom rozbehat na serveri, ale nie som si isty.) - patres
-- investigate: ako dostat tuto haluz na server
-- vyber z pridelenych suborov, z ktorych chce student generovat priklady
-- docker composer nefunguje(to spravi IBAN)
-- [x] obrazok sa nezobrazuje pri rieseni ulohy (Janci)
-- [x] v sekcii studenta dorobit component, ktory zobrazi vsetky pridelene ulohy, tak aby ten isty component vedel zobrazit aj uz vyriesene priklady(teoreticky by na to mohol stacit aj komponent `TeacherTable`)
-- [x] be + fe - okrem generovania potrebujeme aj pre studenta sekciu pre prehlad, kde bude vidno ktore priklady su pre neho vygenerovane, treba k tomu aj spravit `endpoint`
-- [x] be - roleguard na backende(aby student nevedel zavolat endpointy pre ucitela, na ten sa mozno mozeme vygabat, to nebudu kontrolovat)
-- [x] fe - pohrat sa s responzivitou (ucitel done)
-- [x] fe - z navbaru dat prec buttony podla danej roly ktora je prihlasena (teacher -> ucitel), (student -> student)
-- [x] investigate: po zmenseni okna sa do\*ebe navbar, vyriesit
-- [x] be + fe - pridat moznost ucitela skontrolovat pracu studentov, kto ma kolko bodov, ktore ulohy riesil apod
-- [x] be - authguard na backende(aby non logged user nevedel robit requesty)
-- [x] funkcionalita ucitela na vyberanie prikladov (backend + frontend)
-- [x] fe - fixnut endpoint `/api/user/generate` tak aby returnol chybnu message v pripade ze ziadne priklady nie su zvolene pre riesenie (prikldy voli ucitel v sekcii insert).
-- [x] zmenit `LatexFile` model tak, aby mu ucitel vedel nastavit maximalny pocet bodov, ktory sa potom bude pri generacii prikladov z daneho suboru pridelovat
-- [x] many to many relationship medzi user a problem treba prerobit na dalsiu entitu a pridat do nej aj stlpce `solved`, `pocet_bodov`, a `maximalny_pocet_bodov`, aby bolo mozne trackovat, ktory student ktore priklady vyriesil a kolko zane dostal bodov
-- [x] register (vytvorenie endpointu + frontend formular)
-- [x] investigate: tagy v komponente `AssignThesis` nefunguju vobec
-- [x] spravit sk\*rvene corsy na backende, aby sa islo z fe nan pripojit
-- [x] parser na latex subory s prikladmi
-- [x] login (frontend + backend)
-- [x] auth guard, role guard na frontende
-
 ## Docker run
-
-nerobit, je to do\*ebe, treba to prerobit
+Treba nastavit .env subor podla .env.docker
 
 ```bash
 docker compose up -d
