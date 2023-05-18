@@ -22,15 +22,19 @@ class UserController{
     return response()->json($user);
   }
 
-  public function addRandomProblemFromSelectedLatexFiles(){
+  public function addRandomProblemFromSelectedLatexFiles(Request $request){
     $user =  Auth::user();
 
+    //get selected files from body
+    $selectedFiles = $request->all()['problems'];
+
+    // var_dump($selectedFiles);
+
     //ak nie su ziadne files na vyber tak vratim prazdny json
-    if(count(selectedFile::all()) == 0){
+    if(count($selectedFiles) == 0){
       return response()->json();
     }
 
-    $selectedFiles = selectedFile::all()[0]['selectedFiles'];
 
     $arr = $selectedFiles ;
     $actualLatexFiles = array();
