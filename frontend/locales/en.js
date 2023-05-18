@@ -28,6 +28,10 @@ export default {
   singleProblem:{
     submit: "Submit",
     missingImage: "missing image",
+  },
+  tutorial: {
+    generatePDF: 'Generate PDF',
+    header: "Tutorial"
   }
 
 }

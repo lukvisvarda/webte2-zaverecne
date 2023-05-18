@@ -15,7 +15,7 @@ class TutorialSeeder extends Seeder
     {
       $tutorials = [
         [
-          'text' => 'Hello World!', //TODO: CREATE default tutorial text here
+          'text' => 'Vitajte na našom matematickom solveri, pre pridanie nového LaTeX súboru chodťe do sekcie učiteľ a pridajte nový LaTeX súbor. Ak ste študent, v sekcii študent si viete vygenerovať príklady, ktoré následne potom aj viete vyriešiť.',
         ],
 
       ];
