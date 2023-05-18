@@ -10,7 +10,9 @@ import store from './store/store';
 import StudentsPage from "./components/student/StudentsPage.vue";
 import Overview from "./components/teacher/overview/Overview.vue";
 import StudentOverview from "./components/teacher/overview/StudentOverview.vue";
+import SingleProblem from "./components/student/SingleProblem.vue";
 import Tutorial from "./components/tutorial/Tutorial.vue";
+
 // Vue.use(VueRouter);
 
 const routes = [
@@ -40,7 +42,13 @@ const routes = [
     path: "/teacher/student/:id", component:StudentOverview, meta: { requiresAuth: true, requiresTeacher: true }
   },
   {
-    path: '/navod', component: Tutorial, meta: { requiresAuth: true }
+    path: "/students/problem/:id", component: SingleProblem, meta: {requiresAuth: true, requiresTeacher: false}
+  },
+  {
+    path: '/navod', component: Tutorial, meta: {requiresAuth: true}
+  },
+  {
+    path: "/students/problem/:id", component:SingleProblem, meta: { requiresAuth: true, requiresTeacher: false }
   }
 ];
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserProblemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EquationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,8 @@ Route::middleware('jwt.auth')->get("/tutorial", [TutorialController::class, "get
 Route::middleware('jwt.auth')->put("/tutorial", [TutorialController::class, "updateTutorial"]);
 //Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
 
+Route::middleware('jwt.auth')->get('/problems/{id}', [UserProblemController::class, 'getSingleProblem']);
+
+Route::middleware('jwt.auth')->post('/teacher/upload', [UserController::class, 'uploadImages']);
+
+Route::post('/check-equation', [EquationController::class, 'checkEquation']);

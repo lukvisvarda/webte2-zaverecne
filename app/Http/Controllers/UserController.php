@@ -9,7 +9,11 @@ use App\Models\User;
 use App\Models\UserProblem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+
 use NunoMaduro\Collision\Writer;
+
 
 class UserController{
 
@@ -84,6 +88,25 @@ class UserController{
     return response()->json($users);
   }
 
+  public function uploadImages(Request $request)
+  {
+    $request->validate([
+      'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+      'name' => 'required|string',
+    ]);
+
+    foreach ($request->file('images') as $image) {
+      $path = $image->storeAs('public/images', $image->hashName());
+      $url = Storage::url($path);
+    }
+
+    $problem = Problem::where('name', $request->input('name'))->first();
+    $problem->image = $url;
+    $problem->save();
+
+    return response()->json(['message' => 'Images uploaded successfully']);
+  }
+
   public function downloadCSV(Request $request)
   {
     $tempFile = tmpfile();
@@ -117,6 +140,7 @@ class UserController{
 
     // Return the CSV file as a response
     return response(stream_get_contents($tempFile), 200, $headers);
+
   }
 }
 

@@ -13,15 +13,23 @@ export const ASSIGN_GET = 'api/latex/assign'
 
 export const STUDENT_GET = 'api/user/student'
 
+export const IMAGE_POST = 'api/teacher/upload'
+
+
 export const CSV_POST = 'api/user/csv'
 
 export const TUTORIAL_GET_PUT = 'api/tutorial'
+
 
 export const PROBLEM_BY_USER_GET = function (id) {
   return `api/user/${id}/problems`
 }
 
 export const GET_USER_BY_ID = function (id){ return `api/user/${id}`;}
+
+export const PROBLEM_BY_ID_GET = function (id) {
+  return `api/problems/${id}`;
+}
 
 
 

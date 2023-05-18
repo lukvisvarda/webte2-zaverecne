@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isLoading" class="loading">
-      <VueSpinnerHourglass :size="100" color="#0d6efd"/>
+      <VueSpinnerHourglass :size="100" color="#212529"/>
     </div>
     <div v-else>
       <h1>{{ userName }}</h1>

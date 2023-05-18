@@ -1,47 +1,105 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <div class="full-page">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem">
+            <div class="card-body p-5 text-center">
+              <div class="mb-md-5 mt-md-4 pb-5">
+                <h2 class="fw-bold mb-2 text-uppercase">Register</h2>
+                <p class="text-white-50 mb-5">Please enter your credentials!</p>
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="text"
+                    id="name"
+                    v-model="userData.name"
+                    class="form-control form-control-lg"
+                    placeholder="Name"
+                  />
+                </div>
+                <div v-if="this.errors.name" class="text-danger">
+                  {{ this.errors.name[0] }}
+                </div>
 
-      <div class="form-wrapper">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" id="name" v-model="userData.name">
-        <div v-if="this.errors.name" class="text-danger">{{ this.errors.name[0] }}</div>
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="email"
+                    id="email"
+                    v-model="userData.email"
+                    class="form-control form-control-lg"
+                    placeholder="Email"
+                  />
+                </div>
+                <div v-if="this.errors.email" class="text-danger">
+                  {{ this.errors.email[0] }}
+                </div>
 
-        <label for="email">Email</label>
-        <input class="form-control" type="email" id="email" v-model="userData.email">
-        <div v-if="this.errors.email" class="text-danger">{{ this.errors.email[0] }}</div>
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    class="form-control form-control-lg"
+                    id="password"
+                    v-model="userData.password"
+                    placeholder="Password"
+                  />
+                </div>
+                <div v-if="this.errors.password" class="text-danger">
+                  {{ this.errors.password[0] }}
+                </div>
 
-        <label for="password">Heslo</label>
-        <input class="form-control" type="password" id="password" v-model="userData.password">
-        <div v-if="this.errors.password" class="text-danger">{{ this.errors.password[0] }}</div>
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    class="form-control form-control-lg"
+                    id="password_confirmation "
+                    v-model="userData.password_confirmation"
+                    placeholder="Potvrd heslo"
+                  />
+                </div>
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="text"
+                    id="ais_id"
+                    v-model="userData.aisId"
+                    class="form-control form-control-lg"
+                    placeholder="AIS ID"
+                  />
+                </div>
 
-        <label for="password_confirmation ">Potvrd Heslo</label>
-        <input class="form-control" type="password" id="password_confirmation " v-model="userData.password_confirmation ">
-
-        <label for="ais_id">Ais id</label>
-        <input class="form-control" type="text" id="ais_id" v-model="userData.aisId">
-
-        <select v-model="userData.role" class="form-select form-select my-3" aria-label=".form-select-sm example">
-          <option selected>Vyber rolu</option>
-          <option value="student">Študent</option>
-          <option value="teacher">Učiteľ</option>
-        </select>
-        <div v-if="this.errors.role" class="text-danger">{{ this.errors.role[0] }}</div>
-
-        <input type="submit" value="Zaregistrovať" class="btn btn-primary"/>
+                <div class="form-outline form-white mb-4">
+                  <select
+                    v-model="userData.role"
+                    class="form-select form-select my-3"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected :value=this.userData.role>{{ $t('auth.role') }}</option>
+                    <option value="student">{{ $t('auth.student') }}</option>
+                    <option value="teacher">{{ $t('auth.teacher') }}</option>
+                  </select>
+                </div>
+                <div v-if="this.errors.role" class="text-danger">
+                  {{ this.errors.role[0] }}
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">
+                  {{ $t('auth.register') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css';
-import { mapGetters, mapActions } from 'vuex';
-import { useToast } from 'vue-toastification';
+import "bootstrap/dist/css/bootstrap.css";
+import { mapGetters, mapActions } from "vuex";
+import { useToast } from "vue-toastification";
 import store from "../../store/store";
 
 export default {
-  name: 'RegistrationForm',
+  name: "RegistrationForm",
   data() {
     return {
       userData: {
@@ -49,30 +107,30 @@ export default {
         email: '',
         password: '',
         password_confirmation : '',
-        role: 'Vyber rolu',
+        role: this.$t('auth.role'),
         aisId: ''
       },
-      errors: {}
-    }
+      errors: {},
+    };
   },
   computed: {
-    ...mapGetters(['isLoggedIn']),
+    ...mapGetters(["isLoggedIn"]),
   },
   methods: {
-    ...mapActions(['register']),
+    ...mapActions(["register"]),
 
     onSubmit() {
       this.register(this.userData)
-        .then(response => {
+        .then((response) => {
           if (response) {
-            this.redirect('/');
-            this.toast('Registration was successful');
+            this.redirect("/");
+            this.toast("Registration was successful");
           } else {
             this.errors = store.getters.getAuthErrors;
-            this.errToast('Something went wrong');
+            this.errToast("Something went wrong");
           }
         })
-        .catch(errors => {
+        .catch((errors) => {
           console.log(errors);
         });
     },
@@ -84,28 +142,17 @@ export default {
     },
     toast(msg) {
       useToast().success(msg);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-
 <style>
-.form-wrapper{
-  text-align: left;
-  background: aliceblue;
-  padding: 16px 32px;
-  border-radius: 8px;
+.text-danger {
+  margin-bottom: 5px;
 }
 
-.full-page{
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn{
+.btn {
   margin-top: 8px;
 }
 </style>
