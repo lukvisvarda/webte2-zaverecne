@@ -28,7 +28,7 @@ class UserController{
     $selectedFiles = $request->input('problems');
     //ak nie su ziadne files na vyber tak vratim prazdny json
     if(count($selectedFiles) == 0){
-      return response()->json();
+      return response()->json(["message"=>"Nemáte žiadne úlohy na vygenerovanie"]);
     }
 
     $arr = $selectedFiles ;
@@ -36,6 +36,10 @@ class UserController{
 
     foreach ($arr as $fileId) {
       $latexFile = LatexFile::findByName($fileId);
+      var_dump($latexFile->available_from);
+      var_dump(Carbon::now());
+//      dd(Carbon::now());
+      var_dump($latexFile->available_from < Carbon::now());
       if ($latexFile->available_from != null && $latexFile->available_to != null) {
         if ($latexFile->available_from < Carbon::now() && $latexFile->available_to > Carbon::now()) {
           $actualLatexFiles[] = $latexFile;  // tu su aj ti ebody
@@ -47,9 +51,7 @@ class UserController{
       }
     }
 
-    if (sizeof($actualLatexFiles) == 0) {
-      return response()->json(["message"=>"Generovanie nie je možné v tomto čase"]);
-    }
+
 
     $allProblems = array();
     foreach ($actualLatexFiles as $latexFile) {
@@ -58,7 +60,9 @@ class UserController{
         $allProblems[] = $problem;
       }
     }
-
+    if (sizeof($actualLatexFiles) == 0) {
+      return response()->json(["message"=>"Generovanie nie je možné v tomto čase"]);
+    }
     $assignedProblems = $user->assignedProblems()->pluck('problem_id')->toArray();
 
     $unsolvedProblems = array_filter($allProblems, function ($problem) use ($assignedProblems) {

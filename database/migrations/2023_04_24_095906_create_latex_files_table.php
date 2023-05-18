@@ -18,6 +18,8 @@ return new class extends Migration
             $table->json('parsed')->nullable();
             $table->boolean('assigned')->default(false);
             $table->integer('points')->default(0);
+            $table->timestamp('available_from')->nullable();
+            $table->timestamp('available_to')->nullable();
             $table->timestamps();
         });
     }

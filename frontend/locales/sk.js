@@ -38,6 +38,11 @@ export default {
     submit: "Potvrdiť"
   },
 
+  tag: {
+    newTag: 'Pridaj tag',
+    placeholder: 'Pridaj tag'
+  },
+
   problemstable: {
     file_name: "Názov súboru",
     Task: "Úloha",
